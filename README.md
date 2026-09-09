@@ -3,8 +3,8 @@
 Personal site for Anshu Arunav: student engineer at University of Toronto Schools
 working in robotics, embedded systems and automation.
 
-**Live sections:** hero · about · capabilities · selected work · experience ·
-reel · recognition · writing · contact
+**Sections:** hero · about · capabilities · selected work · experience ·
+reel · recognition · contact
 
 ## Stack
 
@@ -12,10 +12,23 @@ Plain HTML, CSS and JavaScript. No build step, no framework, no runtime
 dependencies — open `index.html` and it works.
 
 ```
-index.html   markup and content
-style.css    design tokens + all styling
-script.js    theme, navigation, reveals, counters, contact form
+index.html          markup and content
+style.css           design tokens + all styling
+script.js           theme, nav, reveals, counters, lightbox, contact form
+assets/fonts/       self-hosted Inter + JetBrains Mono (variable, woff2)
+assets/images/      project photos — see the README in that folder
+assets/og-image.png 1200x630 social share card
 ```
+
+## Lighthouse
+
+Measured locally against this repo, mobile emulation:
+
+| | Performance | Accessibility | Best Practices | SEO |
+|---|---|---|---|---|
+| **Score** | 99 | 100 | 100 | 100 |
+
+Six requests, zero third-party on first load, CLS 0, TBT 0ms.
 
 ## Design notes
 
@@ -32,10 +45,17 @@ script.js    theme, navigation, reveals, counters, contact form
 - **No-JS.** Content is visible by default; the reveal styles only apply once
   JavaScript has confirmed it can animate them. Nothing disappears if a script
   fails to load.
-- **Performance.** The YouTube embed is a click-to-load facade, so the first
-  paint doesn't pull in the player.
+- **Performance.** Fonts are self-hosted variable woff2 files, so there is no
+  third-party request on the critical path; the `latin-ext` subsets only
+  download if a page ever uses those characters. The YouTube embed is a
+  click-to-load facade. Hero animations settle rather than looping forever,
+  and pause entirely once the hero scrolls out of view.
 
-## Configuration
+## Adding content
+
+See **[CONTENT.md](CONTENT.md)** for what's left to add — photos, a résumé, the
+contact address — and exactly where each one goes. The site works without any
+of it; nothing is a broken link or an empty frame while it's missing.
 
 The contact form composes a message in the visitor's mail client. Set the
 destination at the top of `script.js`:
@@ -56,7 +76,11 @@ python3 -m http.server 8000
 
 ## Deploying to GitHub Pages
 
-Settings → Pages → Source: `main` (or this branch), folder `/root`.
+Settings → Pages → Source: `main`, folder `/root`. No build step.
+
+A GitHub Action (`.github/workflows/lighthouse.yml`) runs Lighthouse against
+every pull request with a performance budget, so regressions surface before
+they land.
 
 ## Links
 

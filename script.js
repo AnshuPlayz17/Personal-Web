@@ -368,6 +368,87 @@
 
 
   /* ==================================================================
+     PROJECT PHOTOS + LIGHTBOX
+     Photos are optional. A card only swaps from its generated artwork
+     to a photo once that photo has actually decoded, so a missing file
+     degrades to the artwork rather than a broken image.
+     ================================================================== */
+  (function photos() {
+    var shots = $$('.project__photo');
+
+    shots.forEach(function (img) {
+      function ok() {
+        var media = img.closest('.project__media');
+        if (media) media.classList.add('has-photo');
+      }
+      // A cached image can finish before this runs.
+      if (img.complete && img.naturalWidth > 0) { ok(); }
+      else {
+        img.addEventListener('load', ok);
+        img.addEventListener('error', function () { img.remove(); });
+      }
+    });
+
+    var box = $('#lightbox');
+    var boxImg = $('#lightboxImg');
+    var boxCap = $('#lightboxCap');
+    var closeBtn = box && $('.lightbox__close', box);
+    if (!box || !boxImg || typeof box.showModal !== 'function') return;
+
+    var lastFocus = null;
+
+    function openBox(img) {
+      lastFocus = document.activeElement;
+      boxImg.src = img.currentSrc || img.src;
+      boxImg.alt = img.alt || '';
+      if (boxCap) boxCap.textContent = img.alt || '';
+      box.showModal();
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeBox() {
+      box.close();
+    }
+
+    shots.forEach(function (img) {
+      img.addEventListener('click', function () {
+        // Only zoom a photo that actually rendered.
+        if (img.closest('.project__media').classList.contains('has-photo')) openBox(img);
+      });
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeBox);
+
+    // Click the backdrop (outside the image) to dismiss.
+    box.addEventListener('click', function (e) {
+      if (e.target === box) closeBox();
+    });
+
+    box.addEventListener('close', function () {
+      boxImg.removeAttribute('src');
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    });
+  })();
+
+
+  /* ==================================================================
+     HERO IDLE
+     Pause the hero's looping animations once it's scrolled away. Offscreen
+     compositing costs battery and keeps the page from ever settling.
+     ================================================================== */
+  (function heroIdle() {
+    var hero = $('.hero');
+    if (!hero || !('IntersectionObserver' in window)) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      document.body.classList.toggle('hero-idle', !entries[0].isIntersecting);
+    }, { threshold: 0 });
+
+    io.observe(hero);
+  })();
+
+
+  /* ==================================================================
      MISC
      ================================================================== */
   (function misc() {

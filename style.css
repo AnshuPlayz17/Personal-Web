@@ -1,4 +1,50 @@
 /* ==========================================================================
+   Self-hosted variable fonts — no third-party request on the critical path.
+   Each file spans the full 100-900 weight axis, so two files cover the site.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("assets/fonts/inter-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("assets/fonts/inter-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("assets/fonts/jetbrains-mono-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("assets/fonts/jetbrains-mono-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ==========================================================================
    Anshu Arunav — Portfolio
    Design language: Apple-adjacent. Deep neutral ground, one accent,
    real material (blur + hairline borders), tight optical typography,
@@ -123,6 +169,11 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--nav-h) + 24px);
   -webkit-text-size-adjust: 100%;
+  /* `clip` rather than `hidden`: it contains the decorative overhang (the
+     orbit satellites sweep a bounding box wider than their circle) without
+     creating a scroll container, so fixed positioning and smooth scrolling
+     keep working. */
+  overflow-x: clip;
 }
 
 body {
@@ -136,7 +187,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "cv11", "ss01";
-  overflow-x: hidden;
+  overflow-x: clip;
   min-height: 100vh;
 }
 
@@ -212,21 +263,21 @@ button { background: none; border: none; cursor: pointer; }
   width: 46vw; height: 46vw; min-width: 340px; min-height: 340px;
   top: -14vw; left: -8vw;
   background: radial-gradient(circle, var(--accent) 0%, transparent 68%);
-  animation: drift-a 26s var(--e-soft) infinite alternate;
+  animation: drift-a 24s var(--e-soft) forwards;
 }
 .aurora__blob--b {
   width: 38vw; height: 38vw; min-width: 280px; min-height: 280px;
   top: 42vh; right: -12vw;
   background: radial-gradient(circle, var(--accent-2) 0%, transparent 68%);
   opacity: 0.30;
-  animation: drift-b 32s var(--e-soft) infinite alternate;
+  animation: drift-b 28s var(--e-soft) forwards;
 }
 .aurora__blob--c {
   width: 34vw; height: 34vw; min-width: 260px; min-height: 260px;
   bottom: -10vw; left: 28vw;
   background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
   opacity: 0.20;
-  animation: drift-a 38s var(--e-soft) infinite alternate-reverse;
+  animation: drift-b 34s var(--e-soft) forwards;
 }
 :root[data-theme="light"] .aurora__blob { opacity: 0.20; }
 @media (prefers-color-scheme: light) {
@@ -676,6 +727,12 @@ h3 {
   inset: 0;
   animation: spin 20s linear infinite;
 }
+
+/* Idle the hero's loops once it scrolls away — no offscreen compositing. */
+.hero-idle .orbit__sat,
+.hero-idle .hero__status,
+.hero-idle .pulse::after,
+.hero-idle .scroll-hint__track i { animation-play-state: paused; }
 .orbit__sat--2 { inset: 13%; animation-duration: 14s; animation-direction: reverse; }
 .orbit__sat::before {
   content: "";
@@ -1453,6 +1510,8 @@ h3 {
   .aurora__blob, .hero__status, .orbit__sat, .pulse::after, .scroll-hint__track i {
     animation: none !important;
   }
+  .lightbox[open] { animation: none !important; }
+  .project:hover .project__media.has-photo .project__photo { transform: none !important; }
   .sheet__nav a { opacity: 1; transform: none; }
 }
 
@@ -1461,4 +1520,148 @@ h3 {
   body { background: #fff; color: #000; }
   .glass-card { border: 1px solid #ccc; box-shadow: none; background: #fff; }
   .js [data-reveal] { opacity: 1 !important; transform: none !important; }
+}
+
+
+/* --------------------------------------------------------------------------
+   13. PHOTOGRAPHY
+
+   Each project shows a real photo when one is present in assets/images/ and
+   falls back to its generated artwork when it isn't — so the page never has
+   a broken image and never has an empty frame.
+   -------------------------------------------------------------------------- */
+
+.project__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--t-slow) var(--e-soft), transform var(--t-slow) var(--e-out);
+}
+.project__media.has-photo .project__photo { opacity: 1; cursor: zoom-in; }
+.project__media.has-photo .project__art  { opacity: 0; }
+.project__art { transition: opacity var(--t-mid) var(--e-soft); }
+.project:hover .project__media.has-photo .project__photo { transform: scale(1.035); }
+
+
+/* ---- Lightbox ---- */
+.lightbox {
+  width: min(94vw, 1200px);
+  max-width: 94vw;
+  max-height: 92vh;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  color: var(--text);
+  overflow: hidden;
+  box-shadow: var(--shadow-3);
+}
+.lightbox::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.lightbox[open] { animation: lb-in 260ms var(--e-out); }
+@keyframes lb-in { from { opacity: 0; transform: scale(0.97); } }
+.lightbox__img {
+  display: block;
+  width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+  background: var(--bg);
+}
+.lightbox__cap {
+  padding: var(--s-4) var(--s-5);
+  font-size: var(--fs-small);
+  color: var(--text-2);
+  border-top: 1px solid var(--border);
+}
+.lightbox__close {
+  position: absolute;
+  top: 12px; right: 12px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  border-radius: var(--r-pill);
+  background: rgba(20, 20, 24, 0.55);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transition: background-color var(--t-fast) var(--e-soft);
+}
+.lightbox__close:hover { background: rgba(20, 20, 24, 0.8); }
+.lightbox__close .icon { width: 19px; height: 19px; }
+
+
+/* --------------------------------------------------------------------------
+   14. CASE-STUDY DETAIL
+   -------------------------------------------------------------------------- */
+
+.detail {
+  margin-top: var(--s-2);
+  border-top: 1px solid var(--border);
+  padding-top: var(--s-4);
+}
+.detail summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--accent);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.detail summary::-webkit-details-marker { display: none; }
+.detail summary::before {
+  content: "";
+  width: 7px; height: 7px;
+  border-right: 1.6px solid currentColor;
+  border-bottom: 1.6px solid currentColor;
+  transform: rotate(45deg) translate(-1px, -1px);
+  transition: transform var(--t-mid) var(--e-out);
+}
+.detail[open] summary::before { transform: rotate(225deg) translate(-2px, -2px); }
+
+.flow {
+  display: grid;
+  gap: var(--s-3);
+  margin-top: var(--s-4);
+  counter-reset: flow;
+}
+.flow li {
+  display: flex;
+  gap: var(--s-3);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+.flow li span {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px; height: 22px;
+  margin-top: 2px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+}
+.detail__note {
+  margin-top: var(--s-4);
+  padding-left: var(--s-4);
+  border-left: 2px solid var(--border);
+  font-size: 0.9375rem;
+  color: var(--text-3) !important;
+  text-wrap: pretty;
 }
