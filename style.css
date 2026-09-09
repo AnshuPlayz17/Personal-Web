@@ -1554,7 +1554,9 @@ h3 {
   .to-top,
   .lightbox,
   .contact__form,
-  .video,
+  /* The whole reel section, not just the player: hiding only the video left
+     its heading stranded over 200px of nothing. A video is no use on paper. */
+  #reel,
   .hero__visual,
   .hero__cta,
   .nav__indicator,

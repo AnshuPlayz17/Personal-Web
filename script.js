@@ -269,6 +269,23 @@
       if (n.getAttribute('data-plain') !== 'true') n.textContent = '0';
       io.observe(n);
     });
+
+    /* Printing must not catch a counter mid-tick. Snapping the values is not
+       enough on its own: the observer is still armed, so a stat scrolling
+       into view afterwards would restart the animation from zero and put
+       that on the page. Stop the observer as well. */
+    function finalize() {
+      io.disconnect();
+      nums.forEach(function (n) { n.textContent = n.getAttribute('data-count'); });
+    }
+
+    window.addEventListener('beforeprint', finalize);
+    if (window.matchMedia) {
+      var printQuery = window.matchMedia('print');
+      if (printQuery.addEventListener) {
+        printQuery.addEventListener('change', function (e) { if (e.matches) finalize(); });
+      }
+    }
   })();
 
 
@@ -567,13 +584,6 @@
 
       reopened = $$('details:not([open])');
       reopened.forEach(function (d) { d.open = true; });
-
-      // Snap the stat counters to their final values. Printing while they are
-      // still counting up puts the wrong number on paper — a print taken a
-      // second after load showed "Top 9" instead of "Top 10".
-      $$('[data-count]').forEach(function (el) {
-        el.textContent = el.getAttribute('data-count');
-      });
     }
 
     function restore() {

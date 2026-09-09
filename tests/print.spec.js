@@ -35,9 +35,31 @@ test('nothing is transparent when printed', async ({ page }) => {
 
 test('interface chrome is left off the page', async ({ page }) => {
   await printMode(page);
-  for (const sel of ['.nav', '.to-top', '.contact__form', '.video', '.hero__visual', '.scroll-hint']) {
+  for (const sel of ['.nav', '.to-top', '.contact__form', '#reel', '.hero__visual', '.scroll-hint']) {
     await expect(page.locator(sel).first()).toBeHidden();
   }
+});
+
+test('no section heading is left stranded over nothing', async ({ page }) => {
+  await printMode(page);
+  // Hiding the video alone left "The reel" printing above 200px of blank.
+  const stranded = await page.evaluate(() => {
+    const out = [];
+    document.querySelectorAll('section').forEach((s) => {
+      if (getComputedStyle(s).display === 'none') return;
+      const body = [...s.children].filter((child) => {
+        if (child.classList.contains('wrap')) {
+          return [...child.children].some(
+            (g) => !g.classList.contains('sec-head') && getComputedStyle(g).display !== 'none'
+          );
+        }
+        return getComputedStyle(child).display !== 'none';
+      });
+      if (body.length === 0) out.push('#' + (s.id || s.className));
+    });
+    return out;
+  });
+  expect(stranded).toEqual([]);
 });
 
 test('decorative pseudo-elements do not print', async ({ page }) => {
