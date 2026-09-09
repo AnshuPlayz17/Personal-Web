@@ -36,8 +36,8 @@ them.
 
 ## 3. Résumé — done
 
-`assets/anshu-arunav-resume.pdf` is live, regenerated from your third draft, and
-linked from three places: the hero button, the contact list and the footer.
+`assets/anshu-arunav-resume.pdf` is live, regenerated from your fourth draft,
+and linked from three places: the hero button, the contact list and the footer.
 
 It was typeset from your Word document rather than converted from it, because
 the converter available here couldn't open any file at all. The wording is
