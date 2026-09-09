@@ -489,7 +489,20 @@ button { background: none; border: none; cursor: pointer; }
   letter-spacing: -0.045em;
   margin-block: var(--s-5) var(--s-5);
 }
-.display .line { display: block; overflow: hidden; }
+/* The mask that the headline slides out from. `line-height: 0.98` pulls the
+   line box in tighter than the font's natural height, so the box's bottom
+   edge cuts straight through descenders — the g in "Engineering" and the y in
+   "reality" were both being sliced. Measured at 0.114em of overrun.
+
+   Padding pushes the clipping edge below the descenders; the matching
+   negative margin takes the space back, so spacing is identical to before.
+   Both are in em, so this holds at every clamped size. */
+.display .line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.24em;
+  margin-bottom: -0.24em;
+}
 .display .line > span { display: block; }
 .display em {
   font-style: normal;
