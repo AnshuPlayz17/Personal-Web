@@ -3,17 +3,15 @@
 The site is built and deployed. What's left is content only you have. Roughly
 in order of how much each one is worth.
 
-## 1. Contact email
+## 1. Contact email — done
 
-In `script.js`, near the top:
+`CONTACT_EMAIL` in `script.js` is set to `anshuarunav@gmail.com`, so the contact
+form now opens a pre-filled email instead of redirecting to LinkedIn.
 
-```js
-var CONTACT_EMAIL = '';   // ← your address
-```
-
-Until it's set, the contact form validates normally and then sends people to
-LinkedIn. Worth deciding deliberately: putting an address on a public page
-means scrapers will find it. Using LinkedIn only is a legitimate choice.
+One consequence worth knowing: the address is in the page source, so scrapers
+will eventually find it and some spam is likely. That is the normal cost of a
+public contact address. To undo it, set the constant back to `''` and the form
+returns to the LinkedIn hand-off — nothing else needs to change.
 
 ## 2. Depth in the project write-ups
 
