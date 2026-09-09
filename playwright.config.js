@@ -23,9 +23,22 @@ module.exports = defineConfig({
     screenshot: 'only-on-failure',
   },
 
-  // Layout differences below a pixel or two are anti-aliasing, not regressions.
+  /**
+   * An absolute pixel count, not a ratio.
+   *
+   * A 1% ratio sounds strict but scales with the image: on a 1440x900 section
+   * it permits nearly 13,000 changed pixels. A real regression — the headline
+   * mask clipping the descenders off "Engineering" and "reality" — moved only
+   * 379 pixels, so it sat 34x under the threshold and the suite reported the
+   * page unchanged.
+   *
+   * These renders have proven deterministic, matching byte for byte between
+   * this machine and CI, because the fonts are self-hosted and there is no
+   * system font substitution to vary. That makes a tight absolute budget
+   * affordable: enough for stray anti-aliasing, not enough to hide a word.
+   */
   expect: {
-    toHaveScreenshot: { maxDiffPixelRatio: 0.01, animations: 'disabled', scale: 'css' },
+    toHaveScreenshot: { maxDiffPixels: 60, animations: 'disabled', scale: 'css' },
   },
 
   projects: [

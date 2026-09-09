@@ -36,6 +36,35 @@ test.describe('page loads', () => {
   });
 });
 
+test.describe('headline', () => {
+  test('the reveal mask does not clip descenders', async ({ page }) => {
+    // `line-height: 0.98` pulls the line box tighter than the font's natural
+    // height, so the mask's bottom edge once cut straight through the g in
+    // "Engineering" and the y in "reality".
+    //
+    // Rendering the same region twice — once masked, once with the mask
+    // removed — needs no stored baseline, so this runs on every engine and
+    // catches the problem wherever it appears.
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/index.html');
+    await page.evaluate(() => document.fonts.ready);
+    await page.addStyleTag({ content: '.grain, .aurora { display: none !important; }' });
+    await page.waitForTimeout(400);
+
+    const clip = await page.evaluate(() => {
+      const r = document.querySelector('.display').getBoundingClientRect();
+      return { x: Math.floor(r.x) - 4, y: Math.floor(r.y) - 10, width: Math.ceil(r.width) + 8, height: Math.ceil(r.height) + 60 };
+    });
+
+    const masked = await page.screenshot({ clip });
+    await page.addStyleTag({ content: '.display .line { overflow: visible !important; }' });
+    await page.waitForTimeout(200);
+    const unmasked = await page.screenshot({ clip });
+
+    expect(Buffer.compare(masked, unmasked), 'masked headline should render identically to an unmasked one').toBe(0);
+  });
+});
+
 test.describe('theme', () => {
   test('toggles and persists across a reload', async ({ page }) => {
     const before = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
