@@ -47,8 +47,10 @@ means scrapers will find it. Using LinkedIn only is a legitimate choice.
 
 ## 4. Depth in the project write-ups
 
-Each project has a **How it works** section that's accurate but general. What
-would make it genuinely good is the part only you can write:
+The site now carries all four projects from your résumé — VEX 19109M, Agentic
+Crypto Transactions, AI Drone Search and NeoPark — each with a **How it works**
+breakdown. Those are accurate but general. What would make them genuinely good
+is the part only you can write:
 
 - What was the hardest problem, and what did the first attempt get wrong?
 - What did you measure or test to know it was fixed?
@@ -57,6 +59,10 @@ would make it genuinely good is the part only you can write:
 Two or three sentences per project. Add them inside the `.detail__note`
 paragraph in `index.html`. Specific beats polished — "the servo browned out the
 Arduino until I moved it to its own supply" is worth more than any adjective.
+
+The two hackathon projects need this most: they're the newest and the least
+documented, and right now the site can only describe what they do, not what was
+hard about them.
 
 ## 5. Writing — optional
 
