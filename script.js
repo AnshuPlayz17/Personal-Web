@@ -549,6 +549,16 @@
       if (!ticking) { ticking = true; window.requestAnimationFrame(check); }
     }, { passive: true });
 
+    // Keep the button visible for as long as it holds focus. Two things make
+    // this necessary rather than decorative: `visibility` is transitioned with
+    // a delay so the button stays focusable for the length of its own fade-out,
+    // and a Tab can scroll the page, so the scroll handler can decide to hide
+    // the button in the same frame focus arrives on it. The CSS :focus rule
+    // covers that in a focused window; this covers it everywhere, because the
+    // event fires even where :focus does not match.
+    btn.addEventListener('focus', function () { btn.classList.add('is-focus'); });
+    btn.addEventListener('blur', function () { btn.classList.remove('is-focus'); });
+
     btn.addEventListener('click', function () {
       window.scrollTo({
         top: 0,
