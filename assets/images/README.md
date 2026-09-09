@@ -1,10 +1,13 @@
 # Images
 
-Drop a photo in here, then paste four lines into `index.html` to show it.
+Photos are optional. Every project card draws its own artwork in CSS, so the
+page is complete without a single image file and nothing on it reads as a gap.
+This folder is here for the day a good photo exists, not as a to-do.
 
-It's two steps rather than one on purpose: the page ships with no reference to
-these files, so visitors never trigger a 404 for a photo that isn't there yet.
-The styling, lazy-loading and click-to-zoom are already built and waiting.
+If that day comes: drop a photo in here, then paste four lines into
+`index.html`. It's two steps rather than one on purpose — the page ships with
+no reference to these files, so visitors never trigger a 404 for a photo that
+isn't there. The styling, lazy-loading and click-to-zoom are already built.
 
 | Filename | Where it shows | What to shoot |
 |---|---|---|

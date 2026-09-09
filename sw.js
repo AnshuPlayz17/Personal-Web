@@ -16,7 +16,10 @@
    Bumping CACHE below invalidates everything from the previous version.
    ========================================================================== */
 
-const CACHE = 'anshu-portfolio-v1';
+// v2: the résumé PDF was replaced. PDFs are served cache-first with no
+// revalidation, so anyone who had already downloaded the old one would keep
+// getting it forever unless this name changes and activate purges the old cache.
+const CACHE = 'anshu-portfolio-v2';
 
 // Enough to render the page offline. Relative so it works from a project
 // subpath (anshuplayz17.github.io/Personal-Web/) as well as a custom domain.

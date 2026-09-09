@@ -16,9 +16,9 @@ index.html          markup and content
 style.css           design tokens + all styling
 script.js           theme, nav, reveals, counters, lightbox, contact form
 assets/fonts/       self-hosted Inter + JetBrains Mono (variable, woff2)
-assets/images/      project photos — see the README in that folder
+assets/images/      optional project photos — see the README in that folder
 assets/og-image.png 1200x630 social share card
-assets/anshu-arunav-resume.pdf  linked from the hero
+assets/anshu-arunav-resume.pdf  linked from the hero, contact list and footer
 ```
 
 ## Lighthouse
@@ -123,9 +123,11 @@ npm run test:update-snapshots
 
 ## Adding content
 
-See **[CONTENT.md](CONTENT.md)** for what's left to add — photos, a résumé, the
-contact address — and exactly where each one goes. The site works without any
-of it; nothing is a broken link or an empty frame while it's missing.
+See **[CONTENT.md](CONTENT.md)** for what's left to add — the contact address
+and first-hand detail in the project write-ups — and exactly where each one
+goes. The site works without any of it; nothing is a broken link or an empty
+frame while it's missing. Photos are optional and the page does not wait for
+them: every project card draws its own artwork in CSS.
 
 The contact form composes a message in the visitor's mail client. Set the
 destination at the top of `script.js`:

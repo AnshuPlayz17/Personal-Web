@@ -186,11 +186,29 @@ test.describe('navigation', () => {
 });
 
 test.describe('project details', () => {
-  test('each project exposes a How it works disclosure that opens', async ({ page }) => {
-    const details = page.locator('details.detail');
-    await expect(details).toHaveCount(4);
-    await details.first().locator('summary').click();
-    await expect.poll(() => details.first().evaluate((d) => d.open)).toBe(true);
+  test('every project card carries a disclosure that opens', async ({ page }) => {
+    await expect(page.locator('.project')).toHaveCount(5);
+    const details = page.locator('.project details.detail');
+    await expect(details).toHaveCount(5);
+    const n = await details.count();
+    for (let i = 0; i < n; i++) {
+      await details.nth(i).locator('summary').click();
+      await expect.poll(() => details.nth(i).evaluate((d) => d.open)).toBe(true);
+    }
+  });
+
+  // The cards are named after real projects on the résumé. A rename that only
+  // lands in one of the two is the failure worth catching.
+  test('all five résumé projects are on the page', async ({ page }) => {
+    for (const [id, name] of [
+      ['p-vex', 'VEX 19109M'],
+      ['p-calenda', 'Calenda'],
+      ['p-skysaver', 'SkySaver'],
+      ['p-tappy', 'Tappy'],
+      ['p-neopark', 'NeoPark'],
+    ]) {
+      await expect(page.locator(`#${id} h3`)).toHaveText(new RegExp(name));
+    }
   });
 });
 
@@ -212,6 +230,11 @@ test.describe('résumé', () => {
     const res = await request.get(`/${href}`);
     expect(res.status()).toBe(200);
     expect(res.headers()['content-type']).toContain('pdf');
+  });
+
+  test('it is also reachable from the contact list and the footer', async ({ page }) => {
+    await expect(page.locator('.contact__side a[href$="anshu-arunav-resume.pdf"]')).toHaveCount(1);
+    await expect(page.locator('.footer a[href$="anshu-arunav-resume.pdf"]')).toHaveCount(1);
   });
 });
 

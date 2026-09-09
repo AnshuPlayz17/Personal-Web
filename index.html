@@ -7,7 +7,7 @@
 
 <title>Anshu Arunav — Robotics &amp; Embedded Systems</title>
 
-<meta name="description" content="Anshu Arunav is a student engineer at University of Toronto Schools building competitive robots, embedded systems and automation — VEX Worlds 2026 qualifier and creator of NeoPark.">
+<meta name="description" content="Anshu Arunav is a student engineer at University of Toronto Schools building competitive robots, embedded systems and automation — VEX Worlds 2026 qualifier, and the builder behind NeoPark and Calenda.">
 <meta name="author" content="Anshu Arunav">
 <meta name="theme-color" content="#0b0a09" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
@@ -131,8 +131,8 @@
 
       <p class="lead reveal" data-reveal>
         I'm Anshu Arunav — a student at University of Toronto Schools who designs
-        and builds machines. Competition robots, hackathon hardware, and automation
-        systems that have to hold up in the real world.
+        and builds machines. Competition robots, hackathon hardware, automation
+        systems, and a planner app for students like me.
       </p>
 
       <div class="hero__cta reveal" data-reveal>
@@ -234,10 +234,15 @@
         </p>
         <p>
           On the competition side I'm lead builder and driver for VEX team 19109M. The
-          rest of the time it's hackathons and hardware of my own — an NFC approval
-          device for an AI agent, a drone that finds what you describe to it, and
-          NeoPark, a full automation prototype from RFID logic to the servo that
-          lifts the gate.
+          rest of the time it's hackathons and hardware of my own — Tappy, where an
+          NFC tap is what approves anything an AI agent wants to spend; SkySaver, a
+          drone that finds what you describe to it; and NeoPark, a full automation
+          prototype from RFID logic to the servo that lifts the gate.
+        </p>
+        <p>
+          Away from the bench I'm building Calenda, a planner that keeps schoolwork,
+          schedule and family commitments in one place — the tool I wanted and
+          couldn't find.
         </p>
         <p>
           I care about the part of engineering where the schematic meets the physical
@@ -267,6 +272,8 @@
             <ul class="chips chips--quiet">
               <li>Arduino</li>
               <li>VEXcode</li>
+              <li>C++</li>
+              <li>TypeScript</li>
               <li>Electronics</li>
               <li>CAD</li>
               <li>Hand tools</li>
@@ -372,12 +379,12 @@
     <header class="sec-head" data-reveal>
       <p class="sec-num">03</p>
       <h2>Selected work</h2>
-      <p class="sec-sub">A competition robot, two hackathon builds, and the project that started it.</p>
+      <p class="sec-sub">A competition robot, an app in development, two hackathon systems, and the project that started it.</p>
     </header>
 
     <div class="projects">
 
-      <article class="project glass-card" data-reveal>
+      <article class="project glass-card" id="p-vex" data-reveal>
         <div class="project__media">
           <div class="project__art project__art--vex" aria-hidden="true">
             <span class="grid-lines"></span>
@@ -416,37 +423,112 @@
         </div>
       </article>
 
-      <article class="project project--rev glass-card" data-reveal>
+      <article class="project project--rev glass-card" id="p-calenda" data-reveal>
+        <div class="project__media">
+          <div class="project__art project__art--calenda" aria-hidden="true">
+            <span class="grid-lines"></span>
+            <svg class="project__glyph" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="15" rx="2.6"/><path d="M3.5 10h17M8 3.2v4.4M16 3.2v4.4"/><path d="m9 15.2 2 2 4-4"/></svg>
+          </div>
+        </div>
+        <div class="project__body">
+          <div class="project__top">
+            <p class="project__index">02</p>
+            <p class="project__kicker">Web app · Independent, in development</p>
+          </div>
+          <h3>Calenda</h3>
+          <p>
+            A planner for students and families that keeps schoolwork, schedule and
+            commitments in one place instead of spread across several. The core build
+            works end to end; I'm refining it and adding features.
+          </p>
+          <details class="detail">
+            <summary>Where it stands</summary>
+            <ol class="flow">
+              <li><span>1</span> The problem: schoolwork, schedule and family commitments live in different places.</li>
+              <li><span>2</span> Calenda keeps all three in one place.</li>
+              <li><span>3</span> The core build is complete and functional.</li>
+              <li><span>4</span> Now refining it and adding features.</li>
+            </ol>
+            <p class="detail__note">Not public yet — it's still in development. The core works
+              end to end; what's left is refinement and the features that didn't make the first build.</p>
+          </details>
+          <ul class="chips"><li>Web app</li><li>Product design</li><li>Scheduling</li><li>In development</li></ul>
+          <p class="project__note">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20.4 3.6V8h-4.4"/></svg>
+            Independent — core build complete, in active development
+          </p>
+        </div>
+      </article>
+
+      <article class="project glass-card" id="p-skysaver" data-reveal>
+        <div class="project__media">
+          <div class="project__art project__art--drone" aria-hidden="true">
+            <span class="grid-lines"></span>
+            <svg class="project__glyph" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="1.6"/><path d="M9.4 9.4 6.7 6.7M14.6 9.4l2.7-2.7M9.4 14.6l-2.7 2.7M14.6 14.6l2.7 2.7"/><circle cx="5" cy="5" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/></svg>
+          </div>
+        </div>
+        <div class="project__body">
+          <div class="project__top">
+            <p class="project__index">03</p>
+            <p class="project__kicker">Hardware + AI · Ignition Hacks 2026</p>
+          </div>
+          <h3>SkySaver</h3>
+          <p>
+            A natural-language search engine for a drone, aimed at environmental
+            monitoring: describe what you're looking for and the system finds it in the
+            live camera feed and tells you where it is. I built the drone hardware setup
+            and contributed to the codebase behind it. Still in development past the hackathon.
+          </p>
+          <details class="detail">
+            <summary>How it works</summary>
+            <ol class="flow">
+              <li><span>1</span> You describe what you're looking for in ordinary language.</li>
+              <li><span>2</span> Computer vision scans the drone's live camera feed for a match.</li>
+              <li><span>3</span> GPS pins where the match actually is.</li>
+              <li><span>4</span> You get a location on the ground, not just a detection on a screen.</li>
+            </ol>
+            <p class="detail__note">The hard part is the handoff between the three: a description has to
+              become something the camera can recognise, and a recognition has to become a place on the ground.</p>
+          </details>
+          <ul class="chips"><li>Drone hardware</li><li>Computer vision</li><li>GPS</li><li>Natural language</li><li>TypeScript</li></ul>
+          <p class="project__note">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 20 7.6v8.8L12 20.8 4 16.4V7.6z"/><path d="M12 12.2 20 7.6M12 12.2v8.6M12 12.2 4 7.6"/></svg>
+            Built at Ignition Hacks, August 2026 — still in development
+          </p>
+        </div>
+      </article>
+
+      <article class="project project--rev glass-card" id="p-tappy" data-reveal>
         <div class="project__media">
           <div class="project__art project__art--nfc" aria-hidden="true">
             <span class="ring"></span><span class="ring"></span><span class="ring"></span>
             <svg class="project__glyph" viewBox="0 0 24 24"><rect x="2.8" y="6" width="9" height="12" rx="2.2"/><path d="M6 10.5v3"/><path d="M14.8 8.6a4.8 4.8 0 0 1 0 6.8M17.6 6.2a8.6 8.6 0 0 1 0 11.6"/></svg>
           </div>
-          <!-- Photo slot. See assets/images/README.md for the snippet to paste here. -->
         </div>
         <div class="project__body">
           <div class="project__top">
-            <p class="project__index">02</p>
+            <p class="project__index">04</p>
             <p class="project__kicker">Hardware + AI · ETHOnline 2026</p>
           </div>
-          <h3>Agentic Crypto Transactions</h3>
+          <h3>Tappy</h3>
           <p>
-            A team build where an AI agent can carry out crypto transactions on your
-            behalf — but only once you physically tap to approve. I built the NFC
-            hardware and worked on the agent implementation. In progress.
+            An agentic Ethereum wallet. An AI agent works out and carries out
+            transactions on your behalf, but nothing moves until you tap a cold NFC tag —
+            or a Flipper Zero — against your phone. I built the NFC hardware side and
+            worked on the implementation, with the signing keys kept off the agent entirely.
           </p>
           <details class="detail">
             <summary>How it works</summary>
             <ol class="flow">
               <li><span>1</span> The agent works out the transaction it wants to make on your behalf.</li>
-              <li><span>2</span> It cannot send anything on its own — approval is a physical step, not a screen prompt.</li>
-              <li><span>3</span> You tap an NFC tag. That tap is the confirmation.</li>
+              <li><span>2</span> It can't sign anything — the keys never live on the agent.</li>
+              <li><span>3</span> You tap a cold NFC tag or a Flipper Zero to your phone. That tap is the approval.</li>
               <li><span>4</span> Only then does the transaction go through.</li>
             </ol>
-            <p class="detail__note">Putting the approval in the physical world means an agent that gets
-              something wrong still can't move money by itself. Someone has to be there.</p>
+            <p class="detail__note">Keeping the keys off the agent is what makes the tap mean
+              something: an agent that gets a decision wrong still has nothing to spend with.</p>
           </details>
-          <ul class="chips"><li>NFC</li><li>Hardware</li><li>AI agent</li><li>Tap-to-approve</li><li>Crypto</li></ul>
+          <ul class="chips"><li>NFC</li><li>Flipper Zero</li><li>Hardware</li><li>AI agent</li><li>Ethereum</li></ul>
           <p class="project__note">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v4.7l3 1.8"/></svg>
             Team project, in progress — ETHOnline 2026
@@ -454,45 +536,7 @@
         </div>
       </article>
 
-      <article class="project glass-card" data-reveal>
-        <div class="project__media">
-          <div class="project__art project__art--drone" aria-hidden="true">
-            <span class="grid-lines"></span>
-            <svg class="project__glyph" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="1.6"/><path d="M9.4 9.4 6.7 6.7M14.6 9.4l2.7-2.7M9.4 14.6l-2.7 2.7M14.6 14.6l2.7 2.7"/><circle cx="5" cy="5" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/></svg>
-          </div>
-          <!-- Photo slot. See assets/images/README.md for the snippet to paste here. -->
-        </div>
-        <div class="project__body">
-          <div class="project__top">
-            <p class="project__index">03</p>
-            <p class="project__kicker">Hardware + AI · Ignition Hacks 2026</p>
-          </div>
-          <h3>AI Drone Search</h3>
-          <p>
-            Describe what you're looking for in plain language and the drone finds it.
-            I built the drone hardware setup and contributed to the system that reads
-            its live camera feed.
-          </p>
-          <details class="detail">
-            <summary>How it works</summary>
-            <ol class="flow">
-              <li><span>1</span> You describe the object you want in ordinary language.</li>
-              <li><span>2</span> Computer vision scans the drone's live camera feed for a match.</li>
-              <li><span>3</span> GPS pins where the match actually is.</li>
-              <li><span>4</span> You get guided to it.</li>
-            </ol>
-            <p class="detail__note">The hard part is the handoff between the three: a description has to
-              become something the camera can recognise, and a recognition has to become a place on the ground.</p>
-          </details>
-          <ul class="chips"><li>Drone hardware</li><li>Computer vision</li><li>GPS</li><li>Natural language</li></ul>
-          <p class="project__note">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 20 7.6v8.8L12 20.8 4 16.4V7.6z"/><path d="M12 12.2 20 7.6M12 12.2v8.6M12 12.2 4 7.6"/></svg>
-            Built at Ignition Hacks, August 2026
-          </p>
-        </div>
-      </article>
-
-      <article class="project project--rev glass-card" data-reveal>
+      <article class="project glass-card" id="p-neopark" data-reveal>
         <div class="project__media">
           <div class="project__art project__art--neopark" aria-hidden="true">
             <span class="ring"></span><span class="ring"></span><span class="ring"></span>
@@ -502,7 +546,7 @@
         </div>
         <div class="project__body">
           <div class="project__top">
-            <p class="project__index">04</p>
+            <p class="project__index">05</p>
             <p class="project__kicker">Embedded systems · 2025</p>
           </div>
           <h3>NeoPark</h3>
@@ -546,6 +590,24 @@
     </header>
 
     <ol class="timeline">
+
+      <li class="tl" data-reveal>
+        <div class="tl__marker" aria-hidden="true"><span></span></div>
+        <div class="tl__card glass-card">
+          <p class="tl__period">2026 — present</p>
+          <h3>Calenda</h3>
+          <p class="tl__org">Independent</p>
+          <p class="tl__role">Product design · Web app · In development</p>
+          <p>
+            Building a planner for students and families that keeps schoolwork,
+            schedule and commitments on one timeline.
+          </p>
+          <ul class="ticks">
+            <li>Core build complete and functional end to end</li>
+            <li>Currently refining it and adding features</li>
+          </ul>
+        </div>
+      </li>
 
       <li class="tl" data-reveal>
         <div class="tl__marker" aria-hidden="true"><span></span></div>
@@ -699,6 +761,11 @@
           <span class="link-row__v">aanshu_arunavv</span>
           <svg class="icon link-row__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
         </a>
+        <a class="link-row" href="assets/anshu-arunav-resume.pdf" download>
+          <span class="link-row__k">Résumé</span>
+          <span class="link-row__v">PDF, one page</span>
+          <svg class="icon link-row__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7.5 10.5 12 15l4.5-4.5M4.5 20h15"/></svg>
+        </a>
         <p class="contact__aside">Usually replying within a day or two, between practice sessions.</p>
       </div>
 
@@ -765,6 +832,7 @@
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
+      <a href="assets/anshu-arunav-resume.pdf" download>Résumé</a>
       <a href="#home">Back to top</a>
     </nav>
     <p class="footer__copy">© <span id="year">2026</span> Anshu Arunav. Built from scratch.</p>
@@ -778,11 +846,11 @@
   "@type": "Person",
   "name": "Anshu Arunav",
   "jobTitle": "Student Robotics & Embedded Systems Builder",
-  "description": "Student engineer building competitive robots, embedded systems and automation projects.",
+  "description": "Student engineer building competitive robots, embedded systems, automation projects and Calenda, a planner for students and families.",
   "alumniOf": { "@type": "EducationalOrganization", "name": "University of Toronto Schools" },
   "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
   "knowsAbout": ["Robotics", "Embedded Systems", "Electronics", "Arduino", "VEX Robotics",
-                 "Automation", "NFC", "Drones", "Computer Vision"],
+                 "Automation", "NFC", "Drones", "Computer Vision", "Product Design"],
   "sameAs": [
     "https://www.linkedin.com/in/anshu-arunav-ab3454425/",
     "https://github.com/AnshuPlayz17",
