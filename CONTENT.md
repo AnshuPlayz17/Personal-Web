@@ -81,3 +81,18 @@ If you ever do buy one: add a file named `CNAME` at the repo root containing
 just the domain, point an `ALIAS`/`ANAME` record at `anshuplayz17.github.io`,
 then enable **Enforce HTTPS** in Settings → Pages. GitHub issues the
 certificate free.
+
+
+## If the site ever looks out of date after you deploy
+
+A service worker caches the site so it works offline. HTML, CSS and JS are
+network-first, so a deploy should be visible on the next load — but if
+something ever looks stale, paste this into the browser console on the site
+and reload:
+
+```js
+navigator.serviceWorker.controller?.postMessage({ type: 'unregister' });
+```
+
+That removes the worker and everything it cached. The site keeps working; it
+just loses offline support until your next visit re-registers it.

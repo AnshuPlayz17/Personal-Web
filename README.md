@@ -56,8 +56,20 @@ Six requests, zero third-party on first load, CLS 0, TBT 0ms.
   deliberately conservative: HTML, CSS and JS are network-first, so a deploy
   is live on the next load and the cache is only ever an offline fallback.
   Only fonts, icons, images and the résumé are cache-first. Cross-origin
-  requests are never touched. `sw.js` also accepts an `unregister` message as
-  an escape hatch if it ever misbehaves.
+  requests are never touched.
+
+  If the worker ever misbehaves — the usual symptom is the site serving
+  something out of date after a deploy — paste this into the browser console
+  on the site and reload. It tears the worker down and clears everything it
+  cached:
+
+  ```js
+  navigator.serviceWorker.controller?.postMessage({ type: 'unregister' });
+  ```
+
+  Nothing breaks without a worker; the site just loses offline support until
+  the next visit re-registers it. To disable it permanently, delete the
+  `offline()` block in `script.js`.
 - **Performance.** Fonts are self-hosted variable woff2 files, so there is no
   third-party request on the critical path; the `latin-ext` subsets only
   download if a page ever uses those characters. The YouTube embed is a
