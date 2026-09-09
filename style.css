@@ -1527,11 +1527,147 @@ h3 {
   .sheet__nav a { opacity: 1; transform: none; }
 }
 
+/* --------------------------------------------------------------------------
+   PRINT
+
+   Printed, this should read as a document rather than a screenshot of a
+   website: no navigation, no decoration, black on white, and every link's
+   destination spelled out because a reader on paper cannot click it.
+
+   The !important on opacity matters more than it looks. Scroll-driven
+   animations leave most of the page at opacity 0 until it scrolls into view,
+   and a print job has no scroll position — without this the majority of the
+   page prints blank.
+   -------------------------------------------------------------------------- */
+
 @media print {
-  .nav, .sheet, .aurora, .grain, .scroll-hint, .contact__form, .video__play { display: none !important; }
-  body { background: #fff; color: #000; }
-  .glass-card { border: 1px solid #ccc; box-shadow: none; background: #fff; }
-  .js [data-reveal] { opacity: 1 !important; transform: none !important; }
+  @page {
+    margin: 16mm 14mm;
+  }
+
+  /* Interface, decoration and anything that cannot work on paper. */
+  .nav,
+  .sheet,
+  .aurora,
+  .grain,
+  .scroll-hint,
+  .to-top,
+  .lightbox,
+  .contact__form,
+  .video,
+  .hero__visual,
+  .hero__cta,
+  .nav__indicator,
+  .project__art,
+  .project__photo,
+  .bento__icon,
+  .skip-link { display: none !important; }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 10.5pt;
+    line-height: 1.45;
+    letter-spacing: 0;
+  }
+
+  /* Nothing is mid-animation on paper. */
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .glass-card,
+  .card,
+  .project,
+  .tl__card,
+  .award,
+  .info-card {
+    background: #fff !important;
+    border: 1px solid #bbb !important;
+    border-radius: 4px !important;
+  }
+
+  /* The blanket `opacity: 1 !important` above is necessary to stop
+     scroll-driven reveals printing blank, but it also un-hides decorative
+     pseudo-elements that are deliberately transparent — the pointer glow
+     printed as a warm smudge across every card. Remove them outright. */
+  .glass-card::before,
+  .glass-card::after,
+  .project__art::before,
+  .project__art::after,
+  .orbit::after { content: none !important; display: none !important; }
+
+  /* The gradient on "reality." prints as nothing without this. */
+  .display em {
+    background: none !important;
+    -webkit-text-fill-color: #000 !important;
+    color: #000 !important;
+  }
+
+  .wrap { max-width: none; padding-inline: 0; }
+  .section { padding-block: 10mm; }
+  .section::before { display: none !important; }
+  .hero { min-height: auto; padding: 0 0 8mm; display: block; }
+  .hero__grid { display: block; }
+
+  h1, .display { font-size: 24pt !important; line-height: 1.1; }
+  h2 { font-size: 15pt !important; }
+  h3 { font-size: 11.5pt !important; }
+  .lead, .sec-sub { font-size: 11pt !important; max-width: none; }
+
+  .sec-num, .project__index, .tl__period, .award__year,
+  .eyebrow, .project__kicker { color: #444 !important; }
+
+  /* At screen sizes the suffix is a small superscript beside a large numeral;
+     at print sizes that shrinks to something almost illegible. */
+  .stat__suffix { font-size: 0.6em !important; color: #444 !important; }
+
+  .chips li {
+    border: 1px solid #ccc !important;
+    background: none !important;
+    color: #333 !important;
+  }
+
+  /* A reader on paper cannot follow a link, so print where it goes. */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8.5pt;
+    color: #555;
+    word-break: break-all;
+  }
+  /* In-page anchors and the résumé button are meaningless on paper. */
+  .nav a::after,
+  .footer__links a::after,
+  a[href^="#"]::after { content: "" !important; }
+
+  /* Keep blocks whole rather than splitting a card across two sheets. */
+  .project, .tl, .award, .bento__cell, .info-row, .detail {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  h2, h3 { break-after: avoid; page-break-after: avoid; }
+  .sec-head { break-after: avoid; page-break-after: avoid; }
+
+  /* Disclosures are opened by script before printing; make sure they show. */
+  details > *:not(summary) { display: revert !important; }
+  .detail summary { color: #000 !important; }
+  .detail summary::before { display: none !important; }
+
+  .projects { gap: 6mm; }
+  .bento { display: block; }
+  .bento__cell { margin-bottom: 4mm; }
+  .awards, .contact { display: block; }
+  .award { margin-bottom: 4mm; }
+
+  .footer { border-top: 1px solid #bbb; }
+  .footer__links { display: none !important; }
 }
 
 

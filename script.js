@@ -261,7 +261,14 @@
       });
     }, { threshold: 0.5 });
 
-    nums.forEach(function (n) { io.observe(n); });
+    nums.forEach(function (n) {
+      // The markup carries the real figure so it is correct with scripting
+      // off, in a print taken before this runs, and to anything that reads
+      // the page without executing it. Zero it only now, immediately before
+      // animating up to that same figure.
+      if (n.getAttribute('data-plain') !== 'true') n.textContent = '0';
+      io.observe(n);
+    });
   })();
 
 
@@ -537,6 +544,56 @@
     });
 
     check();
+  })();
+
+
+  /* ==================================================================
+     PRINTING
+
+     A closed <details> keeps its contents out of the print job, and CSS
+     alone cannot reliably open one. Open them all before printing and put
+     them back afterwards so the screen is unchanged.
+     ================================================================== */
+  (function printing() {
+    var reopened = [];
+    var expanded = false;
+
+    function expand() {
+      // Both `beforeprint` and the print media query fire for one print job.
+      // Without this guard the second call recorded an empty list, and the
+      // disclosures stayed open on screen after printing.
+      if (expanded) return;
+      expanded = true;
+
+      reopened = $$('details:not([open])');
+      reopened.forEach(function (d) { d.open = true; });
+
+      // Snap the stat counters to their final values. Printing while they are
+      // still counting up puts the wrong number on paper — a print taken a
+      // second after load showed "Top 9" instead of "Top 10".
+      $$('[data-count]').forEach(function (el) {
+        el.textContent = el.getAttribute('data-count');
+      });
+    }
+
+    function restore() {
+      if (!expanded) return;
+      expanded = false;
+      reopened.forEach(function (d) { d.open = false; });
+      reopened = [];
+    }
+
+    window.addEventListener('beforeprint', expand);
+    window.addEventListener('afterprint', restore);
+
+    // Safari has historically fired neither event; the media query listener
+    // covers it.
+    if (window.matchMedia) {
+      var mq = window.matchMedia('print');
+      if (mq.addEventListener) {
+        mq.addEventListener('change', function (e) { (e.matches ? expand : restore)(); });
+      }
+    }
   })();
 
 

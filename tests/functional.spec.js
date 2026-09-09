@@ -200,6 +200,20 @@ test.describe('resilience', () => {
     await expect(page.locator('#projects h2')).toBeVisible();
     await expect(page.locator('#contact h2')).toBeVisible();
   });
+
+  test('the stats show real figures, not the animation start value', async ({ page }) => {
+    await page.goto('/index.html');
+    // The markup used to ship "0" and rely on the count-up to fill it in, so
+    // without scripting the strip read "Top 0" and "0x".
+    const shown = await page.evaluate(() =>
+      [...document.querySelectorAll('[data-count]')].map((e) => ({
+        shown: e.textContent.trim(),
+        want: e.getAttribute('data-count'),
+      }))
+    );
+    expect(shown.length).toBeGreaterThan(0);
+    for (const s of shown) expect(s.shown).toBe(s.want);
+  });
 });
 
 test.describe('reduced motion', () => {

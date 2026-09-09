@@ -46,6 +46,11 @@ Six requests, zero third-party on first load, CLS 0, TBT 0ms.
 - **No-JS.** Content is visible by default; the reveal styles only apply once
   JavaScript has confirmed it can animate them. Nothing disappears if a script
   fails to load.
+- **Print.** Printed, the page reads as a document: no interface, black on
+  white, decoration stripped, blocks kept whole across page breaks, and every
+  external link's destination spelled out since a reader on paper cannot
+  click it. Disclosures are opened and the stat counters snapped to their
+  final values before printing.
 - **Offline.** A service worker caches the site so it opens without a
   connection, and the page is installable from the manifest. It is
   deliberately conservative: HTML, CSS and JS are network-first, so a deploy
@@ -79,6 +84,7 @@ npm run report        # open the last HTML report
 | `tests/visual.spec.js` | 12 sections × 2 themes at desktop, 12 at mobile, plus 3 interaction states | Chromium only |
 | `tests/pwa.spec.js` | manifest validity, every declared icon really exists, worker registers and takes control, cross-origin left alone, unregister escape hatch | Chromium, Firefox, WebKit |
 | `tests/offline.spec.js` | renders with the server actually killed, offline fallback page, and a redeploy never served stale | Chromium, Firefox, WebKit |
+| `tests/print.spec.js` | nothing transparent, chrome hidden, link URLs shown, counters final, disclosures opened and restored | Chromium, Firefox, WebKit |
 
 The offline suite starts and kills its own server rather than using
 Playwright's `setOffline`, which does not apply to service-worker requests —
