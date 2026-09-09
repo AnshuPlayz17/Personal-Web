@@ -124,6 +124,44 @@ test.describe('keyboard', () => {
     expect([...new Set(invisible)]).toEqual([]);
   });
 
+  // The failure this guards against is narrow and was seen only on WebKit CI:
+  // a Tab can scroll the page, the scroll handler can decide to hide the
+  // back-to-top button in that same moment, and `visibility` is transitioned
+  // with a delay — so the button stays focusable for the length of its own
+  // fade-out. Focus then sits on something the user cannot see.
+  test('the back-to-top button stays visible for as long as it holds focus', async ({ page }) => {
+    await settle(page);
+    await page.goto('/index.html');
+
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await expect(page.locator('#toTop')).toHaveClass(/is-shown/);
+
+    await page.locator('#toTop').focus();
+    // Scrolling back to the top makes the scroll handler drop `is-shown`,
+    // which is exactly the moment the button used to fade out under focus.
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(page.locator('#toTop')).not.toHaveClass(/is-shown/);
+    // Well past the 280ms fade, so this cannot pass by catching it mid-transition.
+    await page.waitForTimeout(400);
+
+    const seen = await page.evaluate(() => {
+      const b = document.getElementById('toTop');
+      const cs = getComputedStyle(b);
+      return {
+        focused: document.activeElement === b,
+        opacity: parseFloat(cs.opacity),
+        visibility: cs.visibility,
+        marked: b.classList.contains('is-focus'),
+      };
+    });
+    expect(seen.focused).toBe(true);
+    // `is-focus` is what makes this hold in engines where :focus does not match
+    // a document that is not itself focused.
+    expect(seen.marked).toBe(true);
+    expect(seen.visibility).toBe('visible');
+    expect(seen.opacity).toBeGreaterThan(0.95);
+  });
+
   test('the controls that matter are all reachable by keyboard', async ({ page }) => {
     await settle(page);
     await page.goto('/index.html');
