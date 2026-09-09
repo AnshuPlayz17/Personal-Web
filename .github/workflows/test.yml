@@ -28,6 +28,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # `playwright install --with-deps` shells out to apt-get update, which
+      # consults every repo configured on the runner image — including Google's
+      # Chrome repo. That repo intermittently serves a Packages.gz that fails
+      # its own Release-file hash check, and one bad index fails the whole
+      # update (exit 100), taking all three jobs down before a test can run.
+      # We install Playwright's own browser builds and never Chrome, so the
+      # repo is dead weight here; dropping it keeps apt to the Ubuntu archives.
+      - name: Drop the Chrome apt repo
+        run: sudo rm -f /etc/apt/sources.list.d/google-chrome*
+
       - name: Install ${{ matrix.browser }}
         run: npx playwright install --with-deps ${{ matrix.browser }}
 

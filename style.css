@@ -2106,6 +2106,19 @@ h3 {
 .project__art--nfc .ring:nth-child(2) { opacity: 0.62; }
 .project__art--nfc .ring:nth-child(3) { opacity: 0.34; }
 
+.project__art--calenda {
+  background:
+    radial-gradient(115% 90% at 34% 24%, color-mix(in srgb, var(--accent-2) 24%, transparent), transparent 64%),
+    linear-gradient(175deg, var(--surface-2), transparent);
+}
+/* A month grid rather than a survey grid: cells wider than they are tall, and a
+   broad horizontal fade so it reads as a page of weeks, not a target. */
+.project__art--calenda .grid-lines {
+  background-size: 32px 26px;
+  mask-image: radial-gradient(ellipse 78% 54% at 50% 50%, #000 38%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 54% at 50% 50%, #000 38%, transparent 80%);
+}
+
 .project__art--drone {
   background:
     radial-gradient(110% 85% at 40% 22%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 64%),

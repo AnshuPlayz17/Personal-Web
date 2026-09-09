@@ -3,22 +3,41 @@
 The site is built and deployed. What's left is content only you have. Roughly
 in order of how much each one is worth.
 
-## 1. Photos — the biggest single improvement
+## 1. Contact email
 
-A robotics portfolio with no photos of any robot is asking people to take your
-word for it. Two photos change the whole page:
+In `script.js`, near the top:
 
-- `assets/images/neopark.jpg`
-- `assets/images/vex-19109m.jpg`
+```js
+var CONTACT_EMAIL = '';   // ← your address
+```
 
-Add the file, then paste the four-line snippet from `assets/images/README.md`
-into the matching `<!-- Photo slot -->` comment in `index.html`. The styling,
-lazy-loading and click-to-zoom are already built.
+Until it's set, the contact form validates normally and then sends people to
+LinkedIn. Worth deciding deliberately: putting an address on a public page
+means scrapers will find it. Using LinkedIn only is a legitimate choice.
 
-## 2. Résumé — done
+## 2. Depth in the project write-ups
 
-`assets/anshu-arunav-resume.pdf` is live and the **Résumé** button in the hero
-links to it.
+The site carries all five projects from your résumé — VEX 19109M, Calenda,
+SkySaver, Tappy and NeoPark — each with a **How it works** breakdown. Those are
+accurate but general. What would make them genuinely good is the part only you
+can write:
+
+- What was the hardest problem, and what did the first attempt get wrong?
+- What did you measure or test to know it was fixed?
+- What would you do differently with another month?
+
+Two or three sentences per project. Add them inside the `.detail__note`
+paragraph in `index.html`. Specific beats polished — "the servo browned out the
+Arduino until I moved it to its own supply" is worth more than any adjective.
+
+SkySaver and Tappy need this most: they're the newest and the least documented,
+and right now the site can only describe what they do, not what was hard about
+them.
+
+## 3. Résumé — done
+
+`assets/anshu-arunav-resume.pdf` is live, regenerated from your third draft, and
+linked from three places: the hero button, the contact list and the footer.
 
 It was typeset from your Word document rather than converted from it, because
 the converter available here couldn't open any file at all. The wording is
@@ -33,36 +52,15 @@ email address. Your email, city and school are all still there.
 To update it later, replace the PDF at that path — nothing else needs to change.
 To include the phone number after all, say so and it can be regenerated.
 
-## 3. Contact email
+## 4. Photos — optional, and the page doesn't wait for them
 
-In `script.js`, near the top:
+Every project card draws its own artwork in CSS — a different composition per
+project, not the same placeholder five times — so the page is finished as it
+stands and nothing on it reads as a missing image.
 
-```js
-var CONTACT_EMAIL = '';   // ← your address
-```
-
-Until it's set, the contact form validates normally and then sends people to
-LinkedIn. Worth deciding deliberately: putting an address on a public page
-means scrapers will find it. Using LinkedIn only is a legitimate choice.
-
-## 4. Depth in the project write-ups
-
-The site now carries all four projects from your résumé — VEX 19109M, Agentic
-Crypto Transactions, AI Drone Search and NeoPark — each with a **How it works**
-breakdown. Those are accurate but general. What would make them genuinely good
-is the part only you can write:
-
-- What was the hardest problem, and what did the first attempt get wrong?
-- What did you measure or test to know it was fixed?
-- What would you do differently with another month?
-
-Two or three sentences per project. Add them inside the `.detail__note`
-paragraph in `index.html`. Specific beats polished — "the servo browned out the
-Arduino until I moved it to its own supply" is worth more than any adjective.
-
-The two hackathon projects need this most: they're the newest and the least
-documented, and right now the site can only describe what they do, not what was
-hard about them.
+If you ever do get a photo of the robot or the NeoPark build, dropping one in
+is still a two-minute job: `assets/images/README.md` has the snippet. Until
+then this is not outstanding work, and the rest of this list matters more.
 
 ## 5. Writing — optional
 
