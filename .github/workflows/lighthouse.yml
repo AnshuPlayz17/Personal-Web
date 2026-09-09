@@ -1,0 +1,26 @@
+# Runs Lighthouse against the built site on every PR so quality can't quietly
+# regress. Free for public repositories.
+name: Lighthouse
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Serve the site
+        run: |
+          npx --yes http-server . -p 8080 --silent &
+          npx --yes wait-on http://127.0.0.1:8080/index.html
+
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: http://127.0.0.1:8080/index.html
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          budgetPath: .github/lighthouse-budget.json

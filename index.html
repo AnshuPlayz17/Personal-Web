@@ -16,15 +16,15 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Anshu Arunav — Robotics &amp; Embedded Systems">
 <meta property="og:description" content="Student engineer building competitive robots, embedded systems and automation. VEX Worlds 2026 qualifier. Creator of NeoPark.">
-<meta property="og:image" content="https://i.ytimg.com/vi/3Y-hIcNKANw/maxresdefault.jpg">
+<meta property="og:image" content="assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Anshu Arunav — Robotics and Embedded Systems">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23000'/%3E%3Ctext x='32' y='43' font-family='-apple-system,Segoe UI,Inter,sans-serif' font-size='30' font-weight='600' letter-spacing='-1.5' fill='%23f5f5f7' text-anchor='middle'%3EAA%3C/text%3E%3C/svg%3E">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-latin.woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 
 <script>
@@ -60,7 +60,7 @@
 <header class="nav" id="nav">
   <div class="nav__inner">
 
-    <a class="nav__logo" href="#home">
+    <a class="nav__logo" href="#home" aria-label="Anshu Arunav — back to top">
       <span class="nav__mark" aria-hidden="true">AA</span>
       <span class="nav__name">Anshu Arunav</span>
     </a>
@@ -69,7 +69,6 @@
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
-      <a href="#writing">Writing</a>
       <a href="#contact">Contact</a>
     </nav>
 
@@ -96,8 +95,7 @@
     <a href="#experience"><span>04</span>Experience</a>
     <a href="#reel"><span>05</span>Reel</a>
     <a href="#awards"><span>06</span>Recognition</a>
-    <a href="#writing"><span>07</span>Writing</a>
-    <a href="#contact"><span>08</span>Contact</a>
+    <a href="#contact"><span>07</span>Contact</a>
   </nav>
 </div>
 
@@ -131,6 +129,11 @@
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
         </a>
         <a class="btn btn--ghost" href="#contact">Get in touch</a>
+        <!-- Add assets/anshu-arunav-resume.pdf, then delete the word `hidden` below. -->
+        <a class="btn btn--ghost" id="resumeBtn" href="assets/anshu-arunav-resume.pdf" download hidden>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7.5 10.5 12 15l4.5-4.5M4.5 20h15"/></svg>
+          Résumé
+        </a>
       </div>
 
       <ul class="hero__social reveal" data-reveal>
@@ -344,11 +347,12 @@
     <div class="projects">
 
       <article class="project glass-card" data-reveal>
-        <div class="project__media" aria-hidden="true">
-          <div class="project__art project__art--neopark">
+        <div class="project__media">
+          <div class="project__art project__art--neopark" aria-hidden="true">
             <span class="ring"></span><span class="ring"></span><span class="ring"></span>
             <svg class="project__glyph" viewBox="0 0 24 24"><path d="M4 17V9.5a1 1 0 0 1 .6-.9l6.9-3a1 1 0 0 1 .8 0l6.9 3a1 1 0 0 1 .6.9V17"/><path d="M2.5 17h19M8 17v-4h8v4"/></svg>
           </div>
+          <!-- Photo slot. See assets/images/README.md for the snippet to paste here. -->
         </div>
         <div class="project__body">
           <div class="project__top">
@@ -361,7 +365,18 @@
             infrared sensor confirms it's actually there, a servo drives the barrier and
             an LCD reports state — a complete access-control loop built from scratch.
           </p>
-          <ul class="chips"><li>Arduino</li><li>C++</li><li>RFID</li><li>Servo control</li><li>Automation</li></ul>
+          <details class="detail">
+            <summary>How it works</summary>
+            <ol class="flow">
+              <li><span>1</span> An RFID reader scans the tag and checks it against the authorised IDs.</li>
+              <li><span>2</span> An infrared sensor confirms a vehicle is actually present at the gate.</li>
+              <li><span>3</span> Only with both true does the servo drive the barrier arm up.</li>
+              <li><span>4</span> The LCD reports the current state — reading, granted, denied, open.</li>
+            </ol>
+            <p class="detail__note">Two independent conditions have to agree before anything moves, so a
+              valid tag alone can't open an empty gate and a car alone can't force it.</p>
+          </details>
+          <ul class="chips"><li>Arduino</li><li>C++</li><li>RFID</li><li>IR sensing</li><li>Servo control</li><li>16x2 LCD</li></ul>
           <p class="project__note">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.7l5.9-.8z"/></svg>
             Best Science Fair Project — school-wide recognition
@@ -370,11 +385,12 @@
       </article>
 
       <article class="project project--rev glass-card" data-reveal>
-        <div class="project__media" aria-hidden="true">
-          <div class="project__art project__art--vex">
+        <div class="project__media">
+          <div class="project__art project__art--vex" aria-hidden="true">
             <span class="grid-lines"></span>
             <svg class="project__glyph" viewBox="0 0 24 24"><rect x="3.5" y="8" width="17" height="10" rx="3"/><circle cx="8" cy="18.5" r="2.2"/><circle cx="16" cy="18.5" r="2.2"/><path d="M12 3.5V8M9.5 12.2v.02M14.5 12.2v.02"/></svg>
           </div>
+          <!-- Photo slot. See assets/images/README.md for the snippet to paste here. -->
         </div>
         <div class="project__body">
           <div class="project__top">
@@ -387,7 +403,18 @@
             autonomous programming, driver control and the strategy work between matches.
             Iterated across the whole season against real competition data.
           </p>
-          <ul class="chips"><li>VEX V5</li><li>C++</li><li>Autonomous</li><li>Mechanical design</li><li>Strategy</li></ul>
+          <details class="detail">
+            <summary>How the season ran</summary>
+            <ol class="flow">
+              <li><span>1</span> Design and build the drivetrain and scoring mechanisms for Push Back.</li>
+              <li><span>2</span> Program the autonomous routine and tune it against the real field.</li>
+              <li><span>3</span> Driver practice until the controls are muscle memory.</li>
+              <li><span>4</span> Scout opponents, set match strategy, then rebuild what didn't hold up.</li>
+            </ol>
+            <p class="detail__note">The loop is the point — every competition returned data that changed
+              the next revision of the robot.</p>
+          </details>
+          <ul class="chips"><li>VEX V5</li><li>C++</li><li>Autonomous</li><li>Mechanical design</li><li>Scouting</li></ul>
           <p class="project__note">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 5.5H4.5v1.5a3 3 0 0 0 3 3M17 5.5h2.5V7a3 3 0 0 1-3 3"/></svg>
             Qualified for the 2026 VEX Robotics World Championship
@@ -523,50 +550,12 @@
 </section>
 
 
-<!-- ============ WRITING ============ -->
-<section class="section" id="writing">
-  <div class="wrap">
-
-    <header class="sec-head" data-reveal>
-      <p class="sec-num">07</p>
-      <h2>Writing</h2>
-      <p class="sec-sub">Notes from the workbench. Full posts coming soon.</p>
-    </header>
-
-    <div class="notes">
-
-      <article class="note glass-card" data-reveal>
-        <p class="note__cat">Engineering journal</p>
-        <h3>Building NeoPark: my first embedded system</h3>
-        <p>Designing, debugging and building a complete hardware automation system from concept to working prototype.</p>
-        <p class="note__tags">Arduino · RFID · Automation</p>
-      </article>
-
-      <article class="note glass-card" data-reveal>
-        <p class="note__cat">Robotics</p>
-        <h3>Lessons from competitive robotics</h3>
-        <p>How iteration, teamwork and relentless testing shape a design that actually survives a tournament.</p>
-        <p class="note__tags">VEX · Strategy · Engineering</p>
-      </article>
-
-      <article class="note glass-card" data-reveal>
-        <p class="note__cat">Engineering</p>
-        <h3>Learning through building</h3>
-        <p>Why hands-on projects remain the fastest route to genuinely understanding technology.</p>
-        <p class="note__tags">Hardware · Software · Innovation</p>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-
 <!-- ============ CONTACT ============ -->
 <section class="section section--contact" id="contact">
   <div class="wrap">
 
     <header class="sec-head" data-reveal>
-      <p class="sec-num">08</p>
+      <p class="sec-num">07</p>
       <h2>Let's build something.</h2>
       <p class="sec-sub">Robotics, embedded projects, or a team that needs another engineer — I'd like to hear about it.</p>
     </header>
@@ -626,6 +615,16 @@
 </section>
 
 </main>
+
+
+<!-- ============ LIGHTBOX ============ -->
+<dialog class="lightbox" id="lightbox" aria-label="Enlarged image">
+  <button class="lightbox__close" type="button" aria-label="Close image">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <img class="lightbox__img" id="lightboxImg" alt="">
+  <p class="lightbox__cap" id="lightboxCap"></p>
+</dialog>
 
 
 <!-- ============ FOOTER ============ -->
