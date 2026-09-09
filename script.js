@@ -45,7 +45,7 @@
         meta.name = 'theme-color';
         document.head.appendChild(meta);
       }
-      meta.setAttribute('content', dark ? '#000000' : '#fbfbfd');
+      meta.setAttribute('content', dark ? '#0b0a09' : '#faf7f2');
     }
 
     btn.addEventListener('click', function () {
@@ -66,11 +66,34 @@
     var nav      = $('#nav');
     var progress = $('#scrollProgress');
     var links    = $$('.nav__links a');
+    var bar      = $('#navIndicator');
+    var linkWrap = $('.nav__links');
     var sections = links
       .map(function (a) { return document.querySelector(a.getAttribute('href')); })
       .filter(Boolean);
 
     var ticking = false;
+
+    // The pill that slides between sections. Driven straight from the active
+    // link below — deliberately not a MutationObserver, since the pill lives
+    // inside the element that would be observed and would retrigger it.
+    function place(el) {
+      if (!bar) return;
+      if (!el) { bar.classList.remove('is-on'); return; }
+      bar.style.setProperty('--ix', el.offsetLeft + 'px');
+      bar.style.setProperty('--iw', el.offsetWidth + 'px');
+      bar.classList.add('is-on');
+    }
+
+    if (bar && linkWrap) {
+      // Preview on hover, settle back to the active section on leave.
+      links.forEach(function (a) {
+        a.addEventListener('mouseenter', function () { place(a); });
+      });
+      linkWrap.addEventListener('mouseleave', function () {
+        place(document.querySelector('.nav__links a.is-active'));
+      });
+    }
 
     function update() {
       var y   = window.scrollY || window.pageYOffset;
@@ -85,12 +108,13 @@
       for (var i = 0; i < sections.length; i++) {
         if (sections[i].offsetTop <= line) current = sections[i];
       }
+      var activeLink = null;
       links.forEach(function (a) {
-        a.classList.toggle(
-          'is-active',
-          !!current && a.getAttribute('href') === '#' + current.id
-        );
+        var on = !!current && a.getAttribute('href') === '#' + current.id;
+        a.classList.toggle('is-active', on);
+        if (on) activeLink = a;
       });
+      place(activeLink);
 
       ticking = false;
     }
@@ -162,9 +186,10 @@
      SCROLL REVEAL
      ================================================================== */
   (function reveal() {
-    var targets = $$('[data-reveal]');
+    var scrollDriven = document.documentElement.classList.contains('sdm');
+    var targets = scrollDriven ? [] : $$('[data-reveal]');
     var lines   = $$('.display .line');
-    var all     = targets.concat(lines);
+    var all     = $$('[data-reveal]').concat(lines);
 
     if (reduceMotion.matches || !('IntersectionObserver' in window)) {
       all.forEach(function (el) { el.classList.add('is-in'); });
@@ -445,6 +470,73 @@
     }, { threshold: 0 });
 
     io.observe(hero);
+  })();
+
+
+  /* ==================================================================
+     POINTER GLOW
+     Feeds the cursor position to CSS as percentages. Only custom
+     properties change, so this never triggers layout.
+     ================================================================== */
+  (function glow() {
+    if (reduceMotion.matches) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    var cards = $$('.glass-card');
+    var queued = false, pending = [];
+
+    function flush() {
+      pending.forEach(function (p) {
+        p.el.style.setProperty('--px', p.x + '%');
+        p.el.style.setProperty('--py', p.y + '%');
+      });
+      pending = [];
+      queued = false;
+    }
+
+    cards.forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        pending.push({
+          el: card,
+          x: Math.round(((e.clientX - r.left) / r.width) * 100),
+          y: Math.round(((e.clientY - r.top) / r.height) * 100)
+        });
+        if (!queued) { queued = true; window.requestAnimationFrame(flush); }
+      }, { passive: true });
+    });
+  })();
+
+
+  /* ==================================================================
+     BACK TO TOP
+     ================================================================== */
+  (function toTop() {
+    var btn = $('#toTop');
+    if (!btn) return;
+
+    var ticking = false;
+    function check() {
+      btn.classList.toggle('is-shown', window.scrollY > window.innerHeight * 1.2);
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(check); }
+    }, { passive: true });
+
+    btn.addEventListener('click', function () {
+      window.scrollTo({
+        top: 0,
+        behavior: reduceMotion.matches ? 'auto' : 'smooth'
+      });
+      // Send focus somewhere sensible rather than leaving it on a button
+      // that has just faded out.
+      var logo = $('.nav__logo');
+      if (logo) logo.focus();
+    });
+
+    check();
   })();
 
 

@@ -56,27 +56,29 @@
    -------------------------------------------------------------------------- */
 
 :root {
-  /* Dark is the default ground. */
-  --bg:              #000000;
-  --bg-soft:         #08080a;
-  --surface:         rgba(255, 255, 255, 0.045);
-  --surface-2:       rgba(255, 255, 255, 0.075);
-  --card:            #0e0e12;   /* content layer: opaque, not glass */
-  --border:          rgba(255, 255, 255, 0.105);
-  --border-strong:   rgba(255, 255, 255, 0.20);
+  /* Dark is the default ground — warm near-black, not clinical pure black. */
+  --bg:              #0b0a09;
+  --bg-soft:         #12100e;
+  --surface:         rgba(255, 246, 235, 0.048);
+  --surface-2:       rgba(255, 246, 235, 0.082);
+  --card:            #16130f;   /* content layer: opaque, not glass */
+  --border:          rgba(255, 240, 224, 0.115);
+  --border-strong:   rgba(255, 240, 224, 0.225);
 
-  --text:            #f5f5f7;
-  --text-2:          #a8a8ae;   /* 8.6:1 on #000 */
-  --text-3:          #7c7c84;   /* 5.0:1 on #000 — secondary only */
+  --text:            #f7f4ef;   /* 18.0:1 on --bg */
+  --text-2:          #b3aca2;   /* 8.9:1  */
+  --text-3:          #8b847a;   /* 5.3:1 — secondary only */
 
-  --accent:          #4aa3ff;
-  --accent-ink:      #001428;
-  --accent-soft:     rgba(74, 163, 255, 0.14);
-  --accent-2:        #9c7bff;
+  --accent:          #6fb2ff;   /* stays cool: links and controls read clearer */
+  --accent-ink:      #04121f;
+  --accent-soft:     rgba(111, 178, 255, 0.14);
+  --accent-2:        #ffb35c;   /* warm amber — the cosy half of the pairing */
+  --accent-2-soft:   rgba(255, 179, 92, 0.15);
 
-  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-2: 0 12px 32px -12px rgba(0, 0, 0, 0.7);
-  --shadow-3: 0 32px 70px -24px rgba(0, 0, 0, 0.85);
+  /* Warm-tinted, softer falloff — cold black shadows look like cut-outs. */
+  --shadow-1: 0 1px 2px rgba(20, 12, 4, 0.45);
+  --shadow-2: 0 14px 38px -14px rgba(20, 12, 4, 0.72);
+  --shadow-3: 0 36px 80px -28px rgba(20, 12, 4, 0.88);
 
   --glass-blur: saturate(180%) blur(22px);
 
@@ -98,7 +100,7 @@
   --s-5: 24px;  --s-6: 32px;  --s-7: 48px;  --s-8: 64px;
   --s-9: 96px;  --s-10: 128px;
 
-  --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-xl: 30px; --r-pill: 999px;
+  --r-sm: 12px; --r-md: 18px; --r-lg: 26px; --r-xl: 34px; --r-pill: 999px;
 
   --wrap: 1180px;
   --nav-h: 60px;
@@ -112,47 +114,49 @@
 }
 
 :root[data-theme="light"] {
-  --bg:              #fbfbfd;
-  --bg-soft:         #ffffff;
-  --surface:         rgba(255, 255, 255, 0.78);
-  --surface-2:       rgba(0, 0, 0, 0.035);
-  --card:            #ffffff;
-  --border:          rgba(0, 0, 0, 0.10);
-  --border-strong:   rgba(0, 0, 0, 0.22);
+  --bg:              #faf7f2;   /* warm paper */
+  --bg-soft:         #fffdfa;
+  --surface:         rgba(255, 253, 250, 0.82);
+  --surface-2:       rgba(60, 42, 20, 0.045);
+  --card:            #fffdfa;
+  --border:          rgba(60, 42, 20, 0.12);
+  --border-strong:   rgba(60, 42, 20, 0.26);
 
-  --text:            #12121a;
-  --text-2:          #4a4a55;   /* 8.3:1 on #fbfbfd */
-  --text-3:          #656570;   /* 5.4:1 */
+  --text:            #1c1814;
+  --text-2:          #554d44;   /* 8.0:1 on --bg */
+  --text-3:          #6e655b;   /* 5.5:1 */
 
-  --accent:          #0062d6;
+  --accent:          #0a5fc4;
   --accent-ink:      #ffffff;
-  --accent-soft:     rgba(0, 98, 214, 0.10);
-  --accent-2:        #6a3fe0;
+  --accent-soft:     rgba(10, 95, 196, 0.10);
+  --accent-2:        #9c580f;   /* 5.2:1 on --bg — small text safe */
+  --accent-2-soft:   rgba(156, 88, 15, 0.13);
 
-  --shadow-1: 0 1px 2px rgba(16, 20, 32, 0.06);
-  --shadow-2: 0 14px 34px -14px rgba(16, 20, 32, 0.18);
-  --shadow-3: 0 34px 74px -28px rgba(16, 20, 32, 0.26);
+  --shadow-1: 0 1px 2px rgba(60, 42, 20, 0.07);
+  --shadow-2: 0 14px 34px -14px rgba(60, 42, 20, 0.16);
+  --shadow-3: 0 34px 74px -28px rgba(60, 42, 20, 0.22);
 }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
-    --bg:            #fbfbfd;
-    --bg-soft:       #ffffff;
-    --surface:       rgba(255, 255, 255, 0.78);
-    --surface-2:     rgba(0, 0, 0, 0.035);
-    --card:          #ffffff;
-    --border:        rgba(0, 0, 0, 0.10);
-    --border-strong: rgba(0, 0, 0, 0.22);
-    --text:          #12121a;
-    --text-2:        #4a4a55;
-    --text-3:        #656570;
-    --accent:        #0062d6;
+    --bg:            #faf7f2;
+    --bg-soft:       #fffdfa;
+    --surface:       rgba(255, 253, 250, 0.82);
+    --surface-2:     rgba(60, 42, 20, 0.045);
+    --card:          #fffdfa;
+    --border:        rgba(60, 42, 20, 0.12);
+    --border-strong: rgba(60, 42, 20, 0.26);
+    --text:          #1c1814;
+    --text-2:        #554d44;
+    --text-3:        #6e655b;
+    --accent:        #0a5fc4;
     --accent-ink:    #ffffff;
-    --accent-soft:   rgba(0, 98, 214, 0.10);
-    --accent-2:      #6a3fe0;
-    --shadow-1: 0 1px 2px rgba(16, 20, 32, 0.06);
-    --shadow-2: 0 14px 34px -14px rgba(16, 20, 32, 0.18);
-    --shadow-3: 0 34px 74px -28px rgba(16, 20, 32, 0.26);
+    --accent-soft:   rgba(10, 95, 196, 0.10);
+    --accent-2:      #9c580f;
+    --accent-2-soft: rgba(156, 88, 15, 0.13);
+    --shadow-1: 0 1px 2px rgba(60, 42, 20, 0.07);
+    --shadow-2: 0 14px 34px -14px rgba(60, 42, 20, 0.16);
+    --shadow-3: 0 34px 74px -28px rgba(60, 42, 20, 0.22);
   }
 }
 
@@ -181,9 +185,9 @@ body {
   color: var(--text);
   font-family: var(--font);
   font-size: var(--fs-body);
-  line-height: 1.65;
+  line-height: 1.7;
   font-weight: 400;
-  letter-spacing: -0.011em;
+  letter-spacing: -0.006em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "cv11", "ss01";
@@ -196,6 +200,10 @@ img { height: auto; }
 
 a { color: inherit; text-decoration: none; }
 ul, ol { list-style: none; }
+
+/* `display` on a component overrides the UA rule for [hidden], so anything
+   marked hidden would still render. Enforce it once, here. */
+[hidden] { display: none !important; }
 button, input, textarea { font: inherit; color: inherit; }
 button { background: none; border: none; cursor: pointer; }
 
@@ -262,14 +270,15 @@ button { background: none; border: none; cursor: pointer; }
 .aurora__blob--a {
   width: 46vw; height: 46vw; min-width: 340px; min-height: 340px;
   top: -14vw; left: -8vw;
-  background: radial-gradient(circle, var(--accent) 0%, transparent 68%);
+  background: radial-gradient(circle, var(--accent-2) 0%, transparent 68%);
+  opacity: 0.30;
   animation: drift-a 24s var(--e-soft) forwards;
 }
 .aurora__blob--b {
   width: 38vw; height: 38vw; min-width: 280px; min-height: 280px;
   top: 42vh; right: -12vw;
-  background: radial-gradient(circle, var(--accent-2) 0%, transparent 68%);
-  opacity: 0.30;
+  background: radial-gradient(circle, #ff8f6b 0%, transparent 68%);
+  opacity: 0.26;
   animation: drift-b 28s var(--e-soft) forwards;
 }
 .aurora__blob--c {
@@ -289,6 +298,7 @@ button { background: none; border: none; cursor: pointer; }
 
 .grain {
   position: fixed;
+  background-color: rgba(255, 214, 170, 0.02);
   inset: 0;
   z-index: -1;
   pointer-events: none;
@@ -1664,4 +1674,245 @@ h3 {
   font-size: 0.9375rem;
   color: var(--text-3) !important;
   text-wrap: pretty;
+}
+
+
+/* ==========================================================================
+   15. SCROLL-DRIVEN MOTION
+
+   These use CSS scroll timelines, so the browser drives them off the main
+   thread and they advance only while the page is actually scrolling — no
+   timers, no rAF, nothing running when the reader stops. Where the browser
+   doesn't support them the JavaScript IntersectionObserver reveal from
+   section 10 still runs, so nobody sees a static or blank page.
+   ========================================================================== */
+
+@supports (animation-timeline: view()) {
+  /* Scroll timelines are in charge now; stand the JS reveal down. */
+  html.sdm [data-reveal] { opacity: 1; transform: none; transition: none; }
+
+  /* The headline is above the fold and choreographed on load, so it stays
+     out of the scroll timeline. */
+  html.sdm [data-reveal]:not(.line) {
+    animation: rise-in linear both;
+    animation-timeline: view();
+    animation-range: entry 2% entry 42%;
+  }
+
+  /* Cards get a touch of scale so they feel like they settle into place
+     rather than just sliding. */
+  html.sdm .bento__cell,
+  html.sdm .award,
+  html.sdm .stat {
+    animation: settle-in linear both;
+    animation-timeline: view();
+    animation-range: entry 4% entry 46%;
+  }
+
+  /* The project artwork drifts slower than its card — a shallow parallax
+     that gives the panel some depth without any scroll-jacking. */
+  html.sdm .project__art,
+  html.sdm .project__photo {
+    animation: art-drift linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+  }
+
+  /* The timeline spine draws itself as you read down the section. */
+  html.sdm .timeline::before {
+    animation: draw-line linear both;
+    animation-timeline: view(block 88% 12%);
+    transform-origin: top;
+  }
+
+  /* The hero recedes gently as you leave it, instead of just scrolling off. */
+  html.sdm .hero__copy,
+  html.sdm .hero__visual {
+    animation: hero-recede linear both;
+    animation-timeline: view();
+    animation-range: exit 0% exit 90%;
+  }
+
+  /* Section headings ease up a little further than their body copy, which
+     makes the section feel like it assembles. */
+  html.sdm .sec-head h2 {
+    animation: head-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes settle-in {
+  from { opacity: 0; transform: translateY(30px) scale(0.975); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes art-drift {
+  from { transform: translateY(-4%) scale(1.07); }
+  to   { transform: translateY(4%)  scale(1.07); }
+}
+@keyframes draw-line {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+@keyframes hero-recede {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0.15; transform: translateY(-22px) scale(0.97); }
+}
+@keyframes head-rise {
+  from { opacity: 0; transform: translateY(34px); }
+  to   { opacity: 1; transform: none; }
+}
+
+
+/* --------------------------------------------------------------------------
+   16. WARM POINTER GLOW
+
+   A soft light that follows the cursor across a card. Costs nothing when the
+   pointer is elsewhere: the layer sits at opacity 0 and only two custom
+   properties change, so nothing reflows.
+   -------------------------------------------------------------------------- */
+
+.glass-card { overflow: hidden; }
+
+.glass-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--t-mid) var(--e-soft);
+  background: radial-gradient(
+    260px circle at var(--px, 50%) var(--py, 50%),
+    color-mix(in srgb, var(--accent-2) 16%, transparent),
+    transparent 70%
+  );
+}
+@media (hover: hover) and (pointer: fine) {
+  .glass-card:hover::after { opacity: 1; }
+}
+
+/* The lightbox is a dialog, not a card — no glow, no clipping. */
+.lightbox::after { content: none; }
+
+
+/* --------------------------------------------------------------------------
+   17. BACK TO TOP
+   -------------------------------------------------------------------------- */
+
+.to-top {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: calc(clamp(16px, 3vw, 28px) + env(safe-area-inset-bottom));
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 48px; height: 48px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  color: var(--text);
+  box-shadow: var(--shadow-2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.9);
+  transition: opacity var(--t-mid) var(--e-out),
+              transform var(--t-mid) var(--e-out),
+              visibility 0s linear var(--t-mid),
+              background-color var(--t-fast) var(--e-soft);
+}
+.to-top.is-shown {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+.to-top:hover { background: var(--surface-2); }
+.to-top .icon { width: 19px; height: 19px; }
+
+
+/* --------------------------------------------------------------------------
+   18. SLIDING NAV INDICATOR
+   -------------------------------------------------------------------------- */
+
+.nav__links { position: relative; }
+
+.nav__indicator {
+  position: absolute;
+  left: 0; top: 50%;
+  height: 32px;
+  margin-top: -16px;
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+  opacity: 0;
+  transform: translateX(var(--ix, 0)) scaleX(1);
+  width: var(--iw, 0);
+  transition: transform 420ms var(--e-out), width 420ms var(--e-out),
+              opacity var(--t-mid) var(--e-soft);
+  pointer-events: none;
+}
+.nav__indicator.is-on { opacity: 1; }
+/* the dot is redundant now the pill tracks the section */
+.nav__links a.is-active::after { content: none; }
+.nav__links a { position: relative; z-index: 1; }
+.nav__links a:hover { background: transparent; }
+
+
+/* --------------------------------------------------------------------------
+   19. COSY DETAILS
+   -------------------------------------------------------------------------- */
+
+/* Warm the section numerals — they were the coldest thing on the page. */
+.sec-num, .project__index, .tl__period, .award__year { color: var(--accent-2); }
+.bento__icon { background: var(--accent-2-soft); color: var(--accent-2); }
+.eyebrow .dot { background: var(--accent-2); box-shadow: 0 0 0 3px var(--accent-2-soft); }
+
+/* A soft warm wash behind each section seam, so sections feel like rooms
+   rather than a single flat sheet. */
+.section { position: relative; }
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent,
+              color-mix(in srgb, var(--accent-2) 22%, transparent), transparent);
+  opacity: 0.5;
+}
+.section:first-of-type::before { content: none; }
+
+.about__pull { border-left-color: var(--accent-2); }
+.ticks li::before { border-color: var(--accent-2); }
+
+
+/* --------------------------------------------------------------------------
+   20. REDUCED MOTION — final word
+
+   Everything above is decoration. If the reader asked for less motion they
+   get the finished, readable page and nothing moves.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html.sdm [data-reveal]:not(.line),
+  html.sdm .bento__cell,
+  html.sdm .award,
+  html.sdm .stat,
+  html.sdm .sec-head h2,
+  html.sdm .hero__copy,
+  html.sdm .hero__visual,
+  html.sdm .project__art,
+  html.sdm .project__photo,
+  html.sdm .timeline::before {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .glass-card::after { display: none; }
+  .to-top { transition: opacity 0.001ms !important; }
 }
