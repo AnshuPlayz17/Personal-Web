@@ -20,7 +20,8 @@
 // revalidation, so anyone who had already downloaded the old one would keep
 // getting it forever unless this name changes and activate purges the old cache.
 // v2: résumé rebuilt from draft 3.  v3: rebuilt from draft 4.
-const CACHE = 'anshu-portfolio-v3';
+// v4: résumé re-typeset with page margins — the v3 file printed edge to edge.
+const CACHE = 'anshu-portfolio-v4';
 
 // Enough to render the page offline. Relative so it works from a project
 // subpath (anshuplayz17.github.io/Personal-Web/) as well as a custom domain.
