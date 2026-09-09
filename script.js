@@ -261,7 +261,31 @@
       });
     }, { threshold: 0.5 });
 
-    nums.forEach(function (n) { io.observe(n); });
+    nums.forEach(function (n) {
+      // The markup carries the real figure so it is correct with scripting
+      // off, in a print taken before this runs, and to anything that reads
+      // the page without executing it. Zero it only now, immediately before
+      // animating up to that same figure.
+      if (n.getAttribute('data-plain') !== 'true') n.textContent = '0';
+      io.observe(n);
+    });
+
+    /* Printing must not catch a counter mid-tick. Snapping the values is not
+       enough on its own: the observer is still armed, so a stat scrolling
+       into view afterwards would restart the animation from zero and put
+       that on the page. Stop the observer as well. */
+    function finalize() {
+      io.disconnect();
+      nums.forEach(function (n) { n.textContent = n.getAttribute('data-count'); });
+    }
+
+    window.addEventListener('beforeprint', finalize);
+    if (window.matchMedia) {
+      var printQuery = window.matchMedia('print');
+      if (printQuery.addEventListener) {
+        printQuery.addEventListener('change', function (e) { if (e.matches) finalize(); });
+      }
+    }
   })();
 
 
@@ -537,6 +561,69 @@
     });
 
     check();
+  })();
+
+
+  /* ==================================================================
+     PRINTING
+
+     A closed <details> keeps its contents out of the print job, and CSS
+     alone cannot reliably open one. Open them all before printing and put
+     them back afterwards so the screen is unchanged.
+     ================================================================== */
+  (function printing() {
+    var reopened = [];
+    var expanded = false;
+
+    function expand() {
+      // Both `beforeprint` and the print media query fire for one print job.
+      // Without this guard the second call recorded an empty list, and the
+      // disclosures stayed open on screen after printing.
+      if (expanded) return;
+      expanded = true;
+
+      reopened = $$('details:not([open])');
+      reopened.forEach(function (d) { d.open = true; });
+    }
+
+    function restore() {
+      if (!expanded) return;
+      expanded = false;
+      reopened.forEach(function (d) { d.open = false; });
+      reopened = [];
+    }
+
+    window.addEventListener('beforeprint', expand);
+    window.addEventListener('afterprint', restore);
+
+    // Safari has historically fired neither event; the media query listener
+    // covers it.
+    if (window.matchMedia) {
+      var mq = window.matchMedia('print');
+      if (mq.addEventListener) {
+        mq.addEventListener('change', function (e) { (e.matches ? expand : restore)(); });
+      }
+    }
+  })();
+
+
+  /* ==================================================================
+     OFFLINE SUPPORT
+
+     Registered after load so it never competes with the first paint.
+     Failure is silent and harmless: without a worker the site simply
+     behaves as it always has.
+     ================================================================== */
+  (function offline() {
+    if (!('serviceWorker' in navigator)) return;
+    // Service workers need a secure context; file:// and plain http won't do.
+    if (!window.isSecureContext) return;
+
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {
+        /* no offline support this visit; nothing else changes */
+      });
+    });
   })();
 
 

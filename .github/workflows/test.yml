@@ -1,0 +1,50 @@
+# Behaviour and accessibility on all three engines, visual regression on
+# Chromium. Firefox and WebKit cannot be installed in the authoring sandbox,
+# so this workflow is where those engines actually get exercised.
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  behaviour:
+    name: ${{ matrix.browser }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install ${{ matrix.browser }}
+        run: npx playwright install --with-deps ${{ matrix.browser }}
+
+      # Visual baselines are Chromium-only by design; the other engines run
+      # the behaviour and accessibility suites.
+      - name: Run tests
+        run: |
+          if [ "${{ matrix.browser }}" = "chromium" ]; then
+            npx playwright test --project=chromium
+          else
+            npx playwright test tests/functional.spec.js tests/a11y.spec.js --project=${{ matrix.browser }}
+          fi
+
+      - name: Upload report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ matrix.browser }}
+          path: playwright-report/
+          retention-days: 14
