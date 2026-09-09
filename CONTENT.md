@@ -15,11 +15,23 @@ Add the file, then paste the four-line snippet from `assets/images/README.md`
 into the matching `<!-- Photo slot -->` comment in `index.html`. The styling,
 lazy-loading and click-to-zoom are already built.
 
-## 2. Résumé
+## 2. Résumé — done
 
-Save a PDF to `assets/anshu-arunav-resume.pdf`, then in `index.html` find the
-`Résumé` button and delete the word `hidden` from its tag. It ships hidden so
-the site never offers a download that isn't there.
+`assets/anshu-arunav-resume.pdf` is live and the **Résumé** button in the hero
+links to it.
+
+It was typeset from your Word document rather than converted from it, because
+the converter available here couldn't open any file at all. The wording is
+yours, unchanged; only the layout is new, so it matches the site.
+
+Two things were left out of the public PDF deliberately: your **phone number**
+and the **"AGE 13"** line. Both were in the original. A phone number published
+on a public site and committed to public git history is permanently scrapable
+and effectively impossible to take back, which is a different risk from an
+email address. Your email, city and school are all still there.
+
+To update it later, replace the PDF at that path — nothing else needs to change.
+To include the phone number after all, say so and it can be regenerated.
 
 ## 3. Contact email
 
@@ -35,8 +47,10 @@ means scrapers will find it. Using LinkedIn only is a legitimate choice.
 
 ## 4. Depth in the project write-ups
 
-Each project has a **How it works** section that's accurate but general. What
-would make it genuinely good is the part only you can write:
+The site now carries all four projects from your résumé — VEX 19109M, Agentic
+Crypto Transactions, AI Drone Search and NeoPark — each with a **How it works**
+breakdown. Those are accurate but general. What would make them genuinely good
+is the part only you can write:
 
 - What was the hardest problem, and what did the first attempt get wrong?
 - What did you measure or test to know it was fixed?
@@ -45,6 +59,10 @@ would make it genuinely good is the part only you can write:
 Two or three sentences per project. Add them inside the `.detail__note`
 paragraph in `index.html`. Specific beats polished — "the servo browned out the
 Arduino until I moved it to its own supply" is worth more than any adjective.
+
+The two hackathon projects need this most: they're the newest and the least
+documented, and right now the site can only describe what they do, not what was
+hard about them.
 
 ## 5. Writing — optional
 
