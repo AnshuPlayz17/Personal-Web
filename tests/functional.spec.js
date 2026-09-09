@@ -134,6 +134,37 @@ test.describe('contact form', () => {
     await expect(page.locator('#cf-name')).toBeFocused();
   });
 
+  // The form used to have no address to send to and pushed people to LinkedIn
+  // instead. Now that CONTACT_EMAIL is set, a valid submit must take the email
+  // branch: no LinkedIn popup, and the success status the mailto path sets.
+  test('a valid submit hands off to email, not the LinkedIn fallback', async ({ page }) => {
+    // window.location cannot be redefined in Chromium, and a mailto: never
+    // becomes a request, so watch what the two branches do differently instead:
+    // the fallback opens a window and returns before setting `is-ok`.
+    await page.evaluate(() => {
+      window.__popups = 0;
+      const open = window.open;
+      window.open = function (...a) { window.__popups++; return open.apply(this, a); };
+    });
+
+    await page.fill('#cf-name', 'Test Person');
+    await page.fill('#cf-email', 'test@example.com');
+    await page.fill('#cf-msg', 'Hello, this is a message.');
+    await page.locator('#contactForm button[type=submit]').click();
+
+    await expect(page.locator('#formStatus')).toHaveClass(/is-ok/);
+    await expect(page.locator('#formStatus')).toContainText(/email app/i);
+    expect(await page.evaluate(() => window.__popups)).toBe(0);
+  });
+
+  // And the address itself, which the behaviour above cannot see.
+  test('a contact address is actually configured', async ({ request }) => {
+    const src = await (await request.get('/script.js')).text();
+    const m = src.match(/var CONTACT_EMAIL\s*=\s*'([^']*)'/);
+    expect(m, 'CONTACT_EMAIL declaration not found').not.toBeNull();
+    expect(m[1]).toMatch(/^[^@\s]+@[^@\s]+\.[^@\s]+$/);
+  });
+
   test('a bad email is rejected, a good one clears', async ({ page }) => {
     await page.locator('#cf-name').fill('Test Person');
     await page.locator('#cf-email').fill('not-an-email');

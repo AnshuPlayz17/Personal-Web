@@ -14,7 +14,7 @@
      a pre-filled email to, e.g. 'you@example.com'. While it is empty the
      form politely redirects people to LinkedIn instead of failing.
      ------------------------------------------------------------------ */
-  var CONTACT_EMAIL = '';
+  var CONTACT_EMAIL = 'anshuarunav@gmail.com';
   var LINKEDIN_URL  = 'https://www.linkedin.com/in/anshu-arunav-ab3454425/';
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');

@@ -122,11 +122,21 @@ test('a redeploy is picked up immediately, never served stale', async ({ page })
   await page.waitForTimeout(1500);
 
   // Stand in for a deploy: change the file the worker has already cached.
+  // Match the headline structurally, not by its wording — this used to search
+  // for a specific phrase, and an ordinary copy edit turned the substitution
+  // into a silent no-op.
   const original = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
-  fs.writeFileSync(path.join(dir, 'index.html'), original.replace('Engineering ideas', 'REDEPLOYED MARKER'));
+  const redeployed = original.replace(
+    /<h1 class="display">[\s\S]*?<\/h1>/,
+    '<h1 class="display">REDEPLOYED MARKER</h1>'
+  );
+  expect(redeployed, 'the redeploy substitution did not match anything').not.toBe(original);
+  fs.writeFileSync(path.join(dir, 'index.html'), redeployed);
 
-  await page.goto(`${origin}/index.html`);
-  await expect(page.locator('h1')).toContainText('REDEPLOYED MARKER');
-
-  fs.writeFileSync(path.join(dir, 'index.html'), original);
+  try {
+    await page.goto(`${origin}/index.html`);
+    await expect(page.locator('h1')).toContainText('REDEPLOYED MARKER');
+  } finally {
+    fs.writeFileSync(path.join(dir, 'index.html'), original);
+  }
 });
