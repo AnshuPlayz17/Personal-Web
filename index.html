@@ -125,7 +125,7 @@
 
       <p class="lead reveal" data-reveal>
         I'm Anshu Arunav — a student at University of Toronto Schools who designs
-        and builds machines. Competitive robots, embedded hardware, and automation
+        and builds machines. Competition robots, hackathon hardware, and automation
         systems that have to hold up in the real world.
       </p>
 
@@ -198,8 +198,8 @@
       <p class="stat__label">Roles held: driver, builder, strategist, team lead</p>
     </div>
     <div class="stat" data-reveal>
-      <p class="stat__num"><span data-count="1">0</span><span class="stat__suffix">#</span></p>
-      <p class="stat__label">Best project — 2025 Science Fair</p>
+      <p class="stat__num"><span data-count="6">0</span><span class="stat__suffix stat__suffix--after">×</span></p>
+      <p class="stat__label">Science fair winner, including Best Project 2025</p>
     </div>
   </div>
 </section>
@@ -227,9 +227,11 @@
           I know came from building something, breaking it, and building it again.
         </p>
         <p>
-          On the competition side I drive, build and program for VEX team 19109M. On
-          my own time I design hardware projects like NeoPark — a full automation
-          prototype from RFID logic to the servo that actually lifts the gate.
+          On the competition side I'm lead builder and driver for VEX team 19109M. The
+          rest of the time it's hackathons and hardware of my own — an NFC approval
+          device for an AI agent, a drone that finds what you describe to it, and
+          NeoPark, a full automation prototype from RFID logic to the servo that
+          lifts the gate.
         </p>
         <p>
           I care about the part of engineering where the schematic meets the physical
@@ -243,6 +245,7 @@
             <p class="info-row__k">Education</p>
             <p class="info-row__v">University of Toronto Schools</p>
             <p class="info-row__m">Class of 2031</p>
+            <p class="info-row__m">Spirit of Math, grades 5–8</p>
           </div>
           <div class="info-row">
             <p class="info-row__k">Focus</p>
@@ -263,6 +266,24 @@
               <li>Hand tools</li>
             </ul>
           </div>
+          <div class="info-row">
+            <p class="info-row__k">Away from the bench</p>
+            <ul class="chips chips--quiet">
+              <li>Karate — brown belt</li>
+              <li>Swimming — level 10</li>
+              <li>Badminton</li>
+            </ul>
+            <p class="info-row__m">Grading for senior black belt in December 2026.</p>
+          </div>
+
+          <div class="info-row">
+            <p class="info-row__k">Languages</p>
+            <ul class="chips chips--quiet">
+              <li>English</li><li>French</li><li>Odia</li><li>Mandarin</li><li>Hindi</li>
+            </ul>
+            <p class="info-row__m">Currently learning Latin.</p>
+          </div>
+
           <div class="info-row">
             <p class="info-row__k">Based in</p>
             <p class="info-row__v">Toronto, Ontario</p>
@@ -307,7 +328,7 @@
         </span>
         <h3>Embedded systems</h3>
         <p>Microcontrollers, sensor fusion, motor and servo control, and the wiring that holds it together.</p>
-        <ul class="chips chips--quiet"><li>Arduino</li><li>RFID</li><li>IR sensing</li><li>I²C / LCD</li></ul>
+        <ul class="chips chips--quiet"><li>Arduino</li><li>RFID</li><li>NFC</li><li>Ultrasonic</li><li>Servos</li><li>I²C / LCD</li></ul>
       </article>
 
       <article class="bento__cell glass-card" data-reveal>
@@ -345,12 +366,127 @@
     <header class="sec-head" data-reveal>
       <p class="sec-num">03</p>
       <h2>Selected work</h2>
-      <p class="sec-sub">Two projects that taught me the most.</p>
+      <p class="sec-sub">A competition robot, two hackathon builds, and the project that started it.</p>
     </header>
 
     <div class="projects">
 
       <article class="project glass-card" data-reveal>
+        <div class="project__media">
+          <div class="project__art project__art--vex" aria-hidden="true">
+            <span class="grid-lines"></span>
+            <svg class="project__glyph" viewBox="0 0 24 24"><rect x="3.5" y="8" width="17" height="10" rx="3"/><circle cx="8" cy="18.5" r="2.2"/><circle cx="16" cy="18.5" r="2.2"/><path d="M12 3.5V8M9.5 12.2v.02M14.5 12.2v.02"/></svg>
+          </div>
+          <!-- Photo slot. See assets/images/README.md for the snippet to paste here. -->
+        </div>
+        <div class="project__body">
+          <div class="project__top">
+            <p class="project__index">01</p>
+            <p class="project__kicker">Competitive robotics · 2025–present</p>
+          </div>
+          <h3>VEX 19109M — UTS Circuit Breakers</h3>
+          <p>
+            Lead builder and driver for a season-long V5RC Push Back campaign:
+            drivetrain and scoring mechanisms, autonomous routines, driver control
+            and the strategy work between matches. 20+ hours a week in season.
+          </p>
+          <details class="detail">
+            <summary>How the season ran</summary>
+            <ol class="flow">
+              <li><span>1</span> Design and build the drivetrain and scoring mechanisms for Push Back.</li>
+              <li><span>2</span> Build the autonomous routine and tune it against the real field.</li>
+              <li><span>3</span> Driver practice until the controls are muscle memory, including elimination matches.</li>
+              <li><span>4</span> Scout opponents, set match strategy, then rebuild what didn't hold up.</li>
+            </ol>
+            <p class="detail__note">The loop is the point — every competition returned data that changed
+              the next revision of the robot. Diagnosing a mechanical or control failure on the field,
+              under time pressure, is its own skill.</p>
+          </details>
+          <ul class="chips"><li>VEX V5</li><li>Autonomous</li><li>Mechanical design</li><li>Drivetrain</li><li>Scouting</li></ul>
+          <p class="project__note">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 5.5H4.5v1.5a3 3 0 0 0 3 3M17 5.5h2.5V7a3 3 0 0 1-3 3"/></svg>
+            Qualified for the 2026 VEX Robotics World Championship
+          </p>
+        </div>
+      </article>
+
+      <article class="project project--rev glass-card" data-reveal>
+        <div class="project__media">
+          <div class="project__art project__art--nfc" aria-hidden="true">
+            <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+            <svg class="project__glyph" viewBox="0 0 24 24"><rect x="2.8" y="6" width="9" height="12" rx="2.2"/><path d="M6 10.5v3"/><path d="M14.8 8.6a4.8 4.8 0 0 1 0 6.8M17.6 6.2a8.6 8.6 0 0 1 0 11.6"/></svg>
+          </div>
+          <!-- Photo slot. See assets/images/README.md for the snippet to paste here. -->
+        </div>
+        <div class="project__body">
+          <div class="project__top">
+            <p class="project__index">02</p>
+            <p class="project__kicker">Hardware + AI · ETHOnline 2026</p>
+          </div>
+          <h3>Agentic Crypto Transactions</h3>
+          <p>
+            A team build where an AI agent can carry out crypto transactions on your
+            behalf — but only once you physically tap to approve. I built the NFC
+            hardware and worked on the agent implementation. In progress.
+          </p>
+          <details class="detail">
+            <summary>How it works</summary>
+            <ol class="flow">
+              <li><span>1</span> The agent works out the transaction it wants to make on your behalf.</li>
+              <li><span>2</span> It cannot send anything on its own — approval is a physical step, not a screen prompt.</li>
+              <li><span>3</span> You tap an NFC tag. That tap is the confirmation.</li>
+              <li><span>4</span> Only then does the transaction go through.</li>
+            </ol>
+            <p class="detail__note">Putting the approval in the physical world means an agent that gets
+              something wrong still can't move money by itself. Someone has to be there.</p>
+          </details>
+          <ul class="chips"><li>NFC</li><li>Hardware</li><li>AI agent</li><li>Tap-to-approve</li><li>Crypto</li></ul>
+          <p class="project__note">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v4.7l3 1.8"/></svg>
+            Team project, in progress — ETHOnline 2026
+          </p>
+        </div>
+      </article>
+
+      <article class="project glass-card" data-reveal>
+        <div class="project__media">
+          <div class="project__art project__art--drone" aria-hidden="true">
+            <span class="grid-lines"></span>
+            <svg class="project__glyph" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" rx="1.6"/><path d="M9.4 9.4 6.7 6.7M14.6 9.4l2.7-2.7M9.4 14.6l-2.7 2.7M14.6 14.6l2.7 2.7"/><circle cx="5" cy="5" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/></svg>
+          </div>
+          <!-- Photo slot. See assets/images/README.md for the snippet to paste here. -->
+        </div>
+        <div class="project__body">
+          <div class="project__top">
+            <p class="project__index">03</p>
+            <p class="project__kicker">Hardware + AI · Ignition Hacks 2026</p>
+          </div>
+          <h3>AI Drone Search</h3>
+          <p>
+            Describe what you're looking for in plain language and the drone finds it.
+            I built the drone hardware setup and contributed to the system that reads
+            its live camera feed.
+          </p>
+          <details class="detail">
+            <summary>How it works</summary>
+            <ol class="flow">
+              <li><span>1</span> You describe the object you want in ordinary language.</li>
+              <li><span>2</span> Computer vision scans the drone's live camera feed for a match.</li>
+              <li><span>3</span> GPS pins where the match actually is.</li>
+              <li><span>4</span> You get guided to it.</li>
+            </ol>
+            <p class="detail__note">The hard part is the handoff between the three: a description has to
+              become something the camera can recognise, and a recognition has to become a place on the ground.</p>
+          </details>
+          <ul class="chips"><li>Drone hardware</li><li>Computer vision</li><li>GPS</li><li>Natural language</li></ul>
+          <p class="project__note">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 20 7.6v8.8L12 20.8 4 16.4V7.6z"/><path d="M12 12.2 20 7.6M12 12.2v8.6M12 12.2 4 7.6"/></svg>
+            Built at Ignition Hacks, August 2026
+          </p>
+        </div>
+      </article>
+
+      <article class="project project--rev glass-card" data-reveal>
         <div class="project__media">
           <div class="project__art project__art--neopark" aria-hidden="true">
             <span class="ring"></span><span class="ring"></span><span class="ring"></span>
@@ -360,14 +496,14 @@
         </div>
         <div class="project__body">
           <div class="project__top">
-            <p class="project__index">01</p>
+            <p class="project__index">04</p>
             <p class="project__kicker">Embedded systems · 2025</p>
           </div>
           <h3>NeoPark</h3>
           <p>
-            An Arduino-powered smart parking gate. RFID authenticates the vehicle, an
-            infrared sensor confirms it's actually there, a servo drives the barrier and
-            an LCD reports state — a complete access-control loop built from scratch.
+            My first hackathon project, built solo. An Arduino-powered parking gate:
+            RFID authenticates the vehicle, an infrared sensor confirms it's actually
+            there, a servo drives the barrier and an LCD reports state.
           </p>
           <details class="detail">
             <summary>How it works</summary>
@@ -384,44 +520,6 @@
           <p class="project__note">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.7l5.9-.8z"/></svg>
             Best Science Fair Project — school-wide recognition
-          </p>
-        </div>
-      </article>
-
-      <article class="project project--rev glass-card" data-reveal>
-        <div class="project__media">
-          <div class="project__art project__art--vex" aria-hidden="true">
-            <span class="grid-lines"></span>
-            <svg class="project__glyph" viewBox="0 0 24 24"><rect x="3.5" y="8" width="17" height="10" rx="3"/><circle cx="8" cy="18.5" r="2.2"/><circle cx="16" cy="18.5" r="2.2"/><path d="M12 3.5V8M9.5 12.2v.02M14.5 12.2v.02"/></svg>
-          </div>
-          <!-- Photo slot. See assets/images/README.md for the snippet to paste here. -->
-        </div>
-        <div class="project__body">
-          <div class="project__top">
-            <p class="project__index">02</p>
-            <p class="project__kicker">Competitive robotics · 2025–26</p>
-          </div>
-          <h3>VEX 19109M — UTS Circuit Breakers</h3>
-          <p>
-            A season-long build for the V5RC Push Back game: robot architecture,
-            autonomous routines, driver control and the strategy work between matches.
-            Iterated across the whole season against real competition data.
-          </p>
-          <details class="detail">
-            <summary>How the season ran</summary>
-            <ol class="flow">
-              <li><span>1</span> Design and build the drivetrain and scoring mechanisms for Push Back.</li>
-              <li><span>2</span> Build the autonomous routine and tune it against the real field.</li>
-              <li><span>3</span> Driver practice until the controls are muscle memory.</li>
-              <li><span>4</span> Scout opponents, set match strategy, then rebuild what didn't hold up.</li>
-            </ol>
-            <p class="detail__note">The loop is the point — every competition returned data that changed
-              the next revision of the robot.</p>
-          </details>
-          <ul class="chips"><li>VEX V5</li><li>Autonomous</li><li>Mechanical design</li><li>Drivetrain</li><li>Scouting</li></ul>
-          <p class="project__note">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 5.5H4.5v1.5a3 3 0 0 0 3 3M17 5.5h2.5V7a3 3 0 0 1-3 3"/></svg>
-            Qualified for the 2026 VEX Robotics World Championship
           </p>
         </div>
       </article>
@@ -449,16 +547,17 @@
           <p class="tl__period">2025 — 2026</p>
           <h3>VEX Robotics Team 19109M</h3>
           <p class="tl__org">UTS Circuit Breakers</p>
-          <p class="tl__role">Driver · Main builder · Strategist · Team lead</p>
+          <p class="tl__role">Lead builder · Driver · Strategist · Junior team mentor</p>
           <p>
             Competed the full V5RC 2025–26 Push Back season, owning robot development,
             autonomous routines, driving performance and match strategy.
           </p>
           <ul class="ticks">
             <li>Qualified for the 2026 VEX Robotics World Championship</li>
-            <li>Ontario Provincial qualifier</li>
-            <li>Top 10 team in Ontario</li>
-            <li>Led technical collaboration and team development</li>
+            <li>Ontario Provincial qualifier; top 10 team in Ontario</li>
+            <li>20+ hours a week in season on fabrication, iteration and driver practice</li>
+            <li>Maintain the team engineering notebook — design decisions, iterations, test results</li>
+            <li>Mentor the UTS junior team and train teammates on build technique</li>
           </ul>
         </div>
       </li>
@@ -547,6 +646,18 @@
         <p class="award__year">2025</p>
         <h3>Best Science Fair Project</h3>
         <p>NeoPark recognised as one of the top science fair projects school-wide.</p>
+      </article>
+
+      <article class="award glass-card" data-reveal>
+        <p class="award__year">Six-time</p>
+        <h3>Science fair winner</h3>
+        <p>Six separate science fair wins, most recently with NeoPark in 2025.</p>
+      </article>
+
+      <article class="award glass-card" data-reveal>
+        <p class="award__year">Six-time</p>
+        <h3>Public speaking winner</h3>
+        <p>Six public speaking competition wins — the other half of engineering is explaining it.</p>
       </article>
 
     </div>
@@ -664,7 +775,8 @@
   "description": "Student engineer building competitive robots, embedded systems and automation projects.",
   "alumniOf": { "@type": "EducationalOrganization", "name": "University of Toronto Schools" },
   "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
-  "knowsAbout": ["Robotics", "Embedded Systems", "Electronics", "Arduino", "VEX Robotics", "Automation"],
+  "knowsAbout": ["Robotics", "Embedded Systems", "Electronics", "Arduino", "VEX Robotics",
+                 "Automation", "NFC", "Drones", "Computer Vision"],
   "sameAs": [
     "https://www.linkedin.com/in/anshu-arunav-ab3454425/",
     "https://github.com/AnshuPlayz17",

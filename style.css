@@ -916,6 +916,8 @@ h3 {
   letter-spacing: -0.05em;
   font-variant-numeric: tabular-nums;
 }
+.stat__suffix--after { order: 0 !important; margin-left: -2px; }
+
 .stat__suffix {
   order: -1;
   font-size: 0.42em;
@@ -1915,4 +1917,49 @@ h3 {
   }
   .glass-card::after { display: none; }
   .to-top { transition: opacity 0.001ms !important; }
+}
+
+
+/* --------------------------------------------------------------------------
+   21. ARTWORK FOR THE HACKATHON PROJECTS
+
+   Each project frame gets its own generated treatment so four cards in a row
+   don't read as the same card repeated. These are placeholders in the honest
+   sense: a photo dropped into the slot covers them entirely.
+   -------------------------------------------------------------------------- */
+
+.project__art--nfc {
+  background:
+    radial-gradient(120% 90% at 68% 26%, color-mix(in srgb, var(--accent-2) 30%, transparent), transparent 62%),
+    linear-gradient(200deg, var(--surface-2), transparent);
+}
+/* Concentric arcs reading as a signal radiating from the card. */
+.project__art--nfc .ring {
+  border-color: color-mix(in srgb, var(--accent-2) 32%, transparent);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  transform: rotate(45deg);
+}
+.project__art--nfc .ring:nth-child(2) { opacity: 0.62; }
+.project__art--nfc .ring:nth-child(3) { opacity: 0.34; }
+
+.project__art--drone {
+  background:
+    radial-gradient(110% 85% at 40% 22%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 64%),
+    linear-gradient(160deg, var(--surface-2), transparent);
+}
+/* A tighter grid than the VEX panel — reads as a survey area. */
+.project__art--drone .grid-lines {
+  background-size: 22px 22px;
+  mask-image: radial-gradient(circle at 50% 50%, #000 14%, transparent 68%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 14%, transparent 68%);
+}
+
+/* Five recognition cards leave a hole in a three-column grid; let the last
+   one span the gap instead. */
+@media (min-width: 1025px) {
+  .awards { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .award { grid-column: span 2; }
+  .award:nth-child(4) { grid-column: 2 / span 2; }
+  .award:nth-child(5) { grid-column: span 2; }
 }
