@@ -541,6 +541,26 @@
 
 
   /* ==================================================================
+     OFFLINE SUPPORT
+
+     Registered after load so it never competes with the first paint.
+     Failure is silent and harmless: without a worker the site simply
+     behaves as it always has.
+     ================================================================== */
+  (function offline() {
+    if (!('serviceWorker' in navigator)) return;
+    // Service workers need a secure context; file:// and plain http won't do.
+    if (!window.isSecureContext) return;
+
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {
+        /* no offline support this visit; nothing else changes */
+      });
+    });
+  })();
+
+
+  /* ==================================================================
      MISC
      ================================================================== */
   (function misc() {

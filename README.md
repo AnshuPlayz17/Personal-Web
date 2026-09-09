@@ -46,6 +46,13 @@ Six requests, zero third-party on first load, CLS 0, TBT 0ms.
 - **No-JS.** Content is visible by default; the reveal styles only apply once
   JavaScript has confirmed it can animate them. Nothing disappears if a script
   fails to load.
+- **Offline.** A service worker caches the site so it opens without a
+  connection, and the page is installable from the manifest. It is
+  deliberately conservative: HTML, CSS and JS are network-first, so a deploy
+  is live on the next load and the cache is only ever an offline fallback.
+  Only fonts, icons, images and the résumé are cache-first. Cross-origin
+  requests are never touched. `sw.js` also accepts an `unregister` message as
+  an escape hatch if it ever misbehaves.
 - **Performance.** Fonts are self-hosted variable woff2 files, so there is no
   third-party request on the critical path; the `latin-ext` subsets only
   download if a page ever uses those characters. The YouTube embed is a
@@ -70,6 +77,14 @@ npm run report        # open the last HTML report
 | `tests/functional.spec.js` | theme, menu, form, nav, video facade, résumé, no-JS, reduced motion, overflow at 7 widths | Chromium, Firefox, WebKit |
 | `tests/a11y.spec.js` | axe-core WCAG 2.2 AA in both themes, keyboard traversal, focus visibility, forced colours, 400% reflow | Chromium, Firefox, WebKit |
 | `tests/visual.spec.js` | 12 sections × 2 themes at desktop, 12 at mobile, plus 3 interaction states | Chromium only |
+| `tests/pwa.spec.js` | manifest validity, every declared icon really exists, worker registers and takes control, cross-origin left alone, unregister escape hatch | Chromium, Firefox, WebKit |
+| `tests/offline.spec.js` | renders with the server actually killed, offline fallback page, and a redeploy never served stale | Chromium, Firefox, WebKit |
+
+The offline suite starts and kills its own server rather than using
+Playwright's `setOffline`, which does not apply to service-worker requests —
+verified directly: with the context offline, a navigation still returned the
+server's real 404, so any "works offline" test built on it would pass whether
+or not offline support existed.
 
 Visual baselines are Chromium-only on purpose: Firefox and WebKit binaries
 cannot be downloaded in the environment these were authored in, so their
