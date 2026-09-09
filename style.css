@@ -1974,6 +1974,18 @@ h3 {
   transition-delay: 0s;
 }
 .to-top:hover { background: var(--surface-2); }
+
+/* If this button has keyboard focus it must be visible, whatever the scroll
+   handler or an in-flight fade currently thinks. Without this a Tab that
+   scrolls the button into view can land on it while it is still transparent —
+   WebKit hit exactly that on CI. */
+.to-top:focus,
+.to-top:focus-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: none;
+}
 .to-top .icon { width: 19px; height: 19px; }
 
 

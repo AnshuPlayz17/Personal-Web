@@ -85,10 +85,8 @@ test.describe('keyboard', () => {
     // The real failure mode is a keyboard user tabbing into a control they
     // cannot see — an off-screen menu, a button faded to zero, a dialog that
     // is closed but still reachable.
-    const invisible = [];
-    for (let i = 0; i < 45; i++) {
-      await page.keyboard.press('Tab');
-      const bad = await page.evaluate(() => {
+    const probe = () =>
+      page.evaluate(() => {
         const a = document.activeElement;
         if (!a || a === document.body || a === document.documentElement) return null;
         const cs = getComputedStyle(a);
@@ -105,6 +103,22 @@ test.describe('keyboard', () => {
                   : null;
         return hidden ? `${a.tagName}.${(a.className || '').toString().slice(0, 28)} — ${hidden}` : null;
       });
+
+    const invisible = [];
+    for (let i = 0; i < 45; i++) {
+      await page.keyboard.press('Tab');
+
+      let bad = await probe();
+      if (bad) {
+        // Tabbing can scroll a control into view and reveal it in the same
+        // moment — the back-to-top button fades in over 280ms — and a read
+        // taken mid-transition reports an opacity the user never experiences
+        // as hidden. WebKit lost this race on CI while the other engines did
+        // not. Look again before calling it a failure; something genuinely
+        // hidden stays hidden.
+        await page.waitForTimeout(150);
+        bad = await probe();
+      }
       if (bad) invisible.push(bad);
     }
     expect([...new Set(invisible)]).toEqual([]);
