@@ -52,6 +52,42 @@ Six requests, zero third-party on first load, CLS 0, TBT 0ms.
   click-to-load facade. Hero animations settle rather than looping forever,
   and pause entirely once the hero scrolls out of view.
 
+## Tests
+
+The site itself stays dependency-free — everything in `package.json` is test
+tooling and never ships to a visitor.
+
+```bash
+npm install
+npm test              # everything, Chromium
+npm run test:a11y     # accessibility only
+npm run test:visual   # visual regression only
+npm run report        # open the last HTML report
+```
+
+| Suite | What it covers | Engines |
+|---|---|---|
+| `tests/functional.spec.js` | theme, menu, form, nav, video facade, résumé, no-JS, reduced motion, overflow at 7 widths | Chromium, Firefox, WebKit |
+| `tests/a11y.spec.js` | axe-core WCAG 2.2 AA in both themes, keyboard traversal, focus visibility, forced colours, 400% reflow | Chromium, Firefox, WebKit |
+| `tests/visual.spec.js` | 12 sections × 2 themes at desktop, 12 at mobile, plus 3 interaction states | Chromium only |
+
+Visual baselines are Chromium-only on purpose: Firefox and WebKit binaries
+cannot be downloaded in the environment these were authored in, so their
+baselines could not be generated or trusted there. CI installs all three and
+runs behaviour and accessibility on each, so cross-engine breakage still
+surfaces on every pull request.
+
+Baselines are section-level rather than whole-page. Full-page images came to
+roughly 8 MB and, when one changed, only told you that something somewhere
+had moved. Section shots are a fraction of the weight and point straight at
+what broke; page-level layout is covered by the overflow assertions instead.
+
+After an intentional visual change:
+
+```bash
+npm run test:update-snapshots
+```
+
 ## Adding content
 
 See **[CONTENT.md](CONTENT.md)** for what's left to add — photos, a résumé, the
