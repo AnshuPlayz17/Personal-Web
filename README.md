@@ -140,6 +140,12 @@ A GitHub Action (`.github/workflows/lighthouse.yml`) runs Lighthouse against
 every pull request with a performance budget, so regressions surface before
 they land.
 
+The budget's byte limits are **uncompressed**, because the server CI runs the
+audit against does not gzip. GitHub Pages does, so real transfer is far
+smaller — `style.css` is 62 KB on disk and 14 KB over the wire. The limits are
+set with that ratio in mind: they exist to catch runaway growth, not to
+approximate what a visitor actually downloads.
+
 ## Links
 
 - [LinkedIn](https://www.linkedin.com/in/anshu-arunav-ab3454425/)
