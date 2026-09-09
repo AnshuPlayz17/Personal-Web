@@ -18,6 +18,7 @@ script.js           theme, nav, reveals, counters, lightbox, contact form
 assets/fonts/       self-hosted Inter + JetBrains Mono (variable, woff2)
 assets/images/      project photos — see the README in that folder
 assets/og-image.png 1200x630 social share card
+assets/anshu-arunav-resume.pdf  linked from the hero
 ```
 
 ## Lighthouse

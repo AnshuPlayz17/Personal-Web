@@ -15,11 +15,23 @@ Add the file, then paste the four-line snippet from `assets/images/README.md`
 into the matching `<!-- Photo slot -->` comment in `index.html`. The styling,
 lazy-loading and click-to-zoom are already built.
 
-## 2. Résumé
+## 2. Résumé — done
 
-Save a PDF to `assets/anshu-arunav-resume.pdf`, then in `index.html` find the
-`Résumé` button and delete the word `hidden` from its tag. It ships hidden so
-the site never offers a download that isn't there.
+`assets/anshu-arunav-resume.pdf` is live and the **Résumé** button in the hero
+links to it.
+
+It was typeset from your Word document rather than converted from it, because
+the converter available here couldn't open any file at all. The wording is
+yours, unchanged; only the layout is new, so it matches the site.
+
+Two things were left out of the public PDF deliberately: your **phone number**
+and the **"AGE 13"** line. Both were in the original. A phone number published
+on a public site and committed to public git history is permanently scrapable
+and effectively impossible to take back, which is a different risk from an
+email address. Your email, city and school are all still there.
+
+To update it later, replace the PDF at that path — nothing else needs to change.
+To include the phone number after all, say so and it can be regenerated.
 
 ## 3. Contact email
 
