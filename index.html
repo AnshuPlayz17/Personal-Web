@@ -2,1217 +2,670 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<title>Anshu Arunav | Robotics Engineer</title>
+<title>Anshu Arunav — Robotics &amp; Embedded Systems</title>
 
-<link rel="stylesheet" href="style.css">
+<meta name="description" content="Anshu Arunav is a student engineer at University of Toronto Schools building competitive robots, embedded systems and automation — VEX Worlds 2026 qualifier and creator of NeoPark.">
+<meta name="author" content="Anshu Arunav">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+<meta name="color-scheme" content="dark light">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Anshu Arunav — Robotics &amp; Embedded Systems">
+<meta property="og:description" content="Student engineer building competitive robots, embedded systems and automation. VEX Worlds 2026 qualifier. Creator of NeoPark.">
+<meta property="og:image" content="https://i.ytimg.com/vi/3Y-hIcNKANw/maxresdefault.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23000'/%3E%3Ctext x='32' y='43' font-family='-apple-system,Segoe UI,Inter,sans-serif' font-size='30' font-weight='600' letter-spacing='-1.5' fill='%23f5f5f7' text-anchor='middle'%3EAA%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+<script>
+  /* Mark that scripting is available, and set the theme before first
+     paint so there is no flash. Without this class the page renders
+     fully visible — no JS, no blank sections. */
+  document.documentElement.classList.add('js');
+  (function () {
+    try {
+      var saved = localStorage.getItem('aa-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
 </head>
-
 
 <body>
 
+<a class="skip-link" href="#main">Skip to content</a>
 
-<!-- Loading Screen -->
-
-<div id="loader">
-
-<div class="loader-logo">
-AA
+<!-- Ambient background -->
+<div class="aurora" aria-hidden="true">
+  <span class="aurora__blob aurora__blob--a"></span>
+  <span class="aurora__blob aurora__blob--b"></span>
+  <span class="aurora__blob aurora__blob--c"></span>
 </div>
-
-<p>
-Initializing Engineering Portfolio...
-</p>
-
-</div>
+<div class="grain" aria-hidden="true"></div>
 
 
+<!-- ============ NAVIGATION ============ -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
 
+    <a class="nav__logo" href="#home">
+      <span class="nav__mark" aria-hidden="true">AA</span>
+      <span class="nav__name">Anshu Arunav</span>
+    </a>
 
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#writing">Writing</a>
+      <a href="#contact">Contact</a>
+    </nav>
 
-<!-- Background -->
+    <div class="nav__actions">
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to light theme">
+        <svg class="icon icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="icon icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg>
+      </button>
 
-<div class="grid-background"></div>
+      <button class="icon-btn nav__burger" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="burger" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
 
-<div class="noise"></div>
-
-
-
-<!-- Cursor -->
-
-<div class="cursor"></div>
-
-
-
-
-
-<!-- Navigation -->
-
-<header>
-
-<nav>
-
-<div class="logo">
-Anshu Arunav
-</div>
-
-
-<ul>
-
-<li>
-<a href="#about">About</a>
-</li>
-
-<li>
-<a href="#projects">Projects</a>
-</li>
-
-<li>
-<a href="#experience">Experience</a>
-</li>
-
-<li>
-<a href="#writing">Writing</a>
-</li>
-
-<li>
-<a href="#contact">Contact</a>
-</li>
-
-
-</ul>
-
-
-<button class="menu">
-☰
-</button>
-
-
-</nav>
-
-
+  </div>
+  <div class="nav__progress" aria-hidden="true"><span id="scrollProgress"></span></div>
 </header>
 
+<div class="sheet" id="mobileMenu" hidden>
+  <nav class="sheet__nav" aria-label="Mobile">
+    <a href="#about"><span>01</span>About</a>
+    <a href="#skills"><span>02</span>Capabilities</a>
+    <a href="#projects"><span>03</span>Projects</a>
+    <a href="#experience"><span>04</span>Experience</a>
+    <a href="#reel"><span>05</span>Reel</a>
+    <a href="#awards"><span>06</span>Recognition</a>
+    <a href="#writing"><span>07</span>Writing</a>
+    <a href="#contact"><span>08</span>Contact</a>
+  </nav>
+</div>
 
 
+<main id="main">
 
-
-
-
-
-
-<!-- HERO -->
-
+<!-- ============ HERO ============ -->
 <section class="hero" id="home">
-
-
-<div class="hero-content">
-
-
-<p class="eyebrow">
-
-ROBOTICS ENGINEER • STUDENT • BUILDER
-
-</p>
-
-
-
-<h1>
-
-Engineering
-<br>
-
-<span>
-ideas into reality.
-</span>
-
-</h1>
-
-
-
-
-<p class="hero-description">
-
-I'm Anshu Arunav, a student at University of Toronto Schools
-building robots, embedded systems, and automation projects
-through hardware and software.
-
-</p>
-
-
-
-<div class="hero-buttons">
-
-
-<a href="#projects" class="primary-btn">
-View Projects
-</a>
-
-
-
-
-
-</div>
-
-
-
-
-<div class="social-links">
-
-
-<a href="https://www.linkedin.com/in/anshu-arunav-ab3454425/" target="_blank">
-
-LinkedIn
-
-</a>
-
-
-<a href="https://github.com/AnshuPlayz17" target="_blank">
-
-GitHub
-
-</a>
-
-
-<a href="https://www.instagram.com/aanshu_arunavv/" target="_blank">
-
-Instagram
-
-</a>
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="hero-visual">
-
-
-<div class="profile-silhouette">
-
-
-<div class="circle">
-
-</div>
-
-
-<div class="profile-text">
-
-AA
-
-</div>
-
-
-</div>
-
-
-
-<div class="floating-card">
-
-
-<p>
-Currently building
-</p>
-
-
-<h3>
-Robotics + Embedded Systems
-</h3>
-
-
-</div>
-
-
-</div>
-
-
+  <div class="wrap hero__grid">
+
+    <div class="hero__copy">
+      <p class="eyebrow reveal" data-reveal>
+        <span class="dot" aria-hidden="true"></span>
+        Robotics&nbsp;· Embedded Systems&nbsp;· Toronto
+      </p>
+
+      <h1 class="display">
+        <span class="line" data-reveal><span>Engineering ideas</span></span>
+        <span class="line" data-reveal><span>into <em>reality.</em></span></span>
+      </h1>
+
+      <p class="lead reveal" data-reveal>
+        I'm Anshu Arunav — a student at University of Toronto Schools who designs,
+        builds and programs machines. Competitive robots, embedded hardware, and
+        automation systems where the software and the metal have to agree.
+      </p>
+
+      <div class="hero__cta reveal" data-reveal>
+        <a class="btn btn--primary" href="#projects">
+          View projects
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="#contact">Get in touch</a>
+      </div>
+
+      <ul class="hero__social reveal" data-reveal>
+        <li><a href="https://www.linkedin.com/in/anshu-arunav-ab3454425/" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 9.5v10M4.5 5.2v.02M10 19.5v-10M10 13.2c0-2 1.4-3.4 3.3-3.4 1.9 0 3.2 1.3 3.2 3.6v6.1"/></svg>
+          LinkedIn</a></li>
+        <li><a href="https://github.com/AnshuPlayz17" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1.2-4-2.3-5.6-2.8M15 21v-3.4a3 3 0 0 0-.8-2.3c2.7-.3 5.4-1.3 5.4-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6 0C6.4 2.6 5.4 2.9 5.4 2.9a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.3c0 4.6 2.7 5.7 5.4 6a3 3 0 0 0-.8 2.3V21"/></svg>
+          GitHub</a></li>
+        <li><a href="https://www.instagram.com/aanshu_arunavv/" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="3.8"/><path d="M17.2 6.9v.02"/></svg>
+          Instagram</a></li>
+      </ul>
+    </div>
+
+    <div class="hero__visual" aria-hidden="true">
+      <div class="orbit">
+        <span class="orbit__ring orbit__ring--1"></span>
+        <span class="orbit__ring orbit__ring--2"></span>
+        <span class="orbit__ring orbit__ring--3"></span>
+        <span class="orbit__sat orbit__sat--1"></span>
+        <span class="orbit__sat orbit__sat--2"></span>
+        <span class="orbit__core">AA</span>
+      </div>
+
+      <div class="glass-card hero__status">
+        <span class="pulse" aria-hidden="true"></span>
+        <div>
+          <p class="glass-card__label">Currently building</p>
+          <p class="glass-card__value">V5RC Push Back — 19109M</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <a class="scroll-hint" href="#stats" aria-label="Scroll to content">
+    <span class="scroll-hint__track" aria-hidden="true"><i></i></span>
+    <span>Scroll</span>
+  </a>
 </section>
 
 
-
-
-
-
-
-
-
-<!-- ABOUT -->
-
-<section id="about" class="section reveal">
-
-
-<div class="section-title">
-
-<p>
-01
-</p>
-
-<h2>
-About Me
-</h2>
-
-</div>
-
-
-
-
-<div class="about-container">
-
-
-
-<div class="about-text">
-
-
-<p>
-
-I am a student at the University of Toronto Schools
-(Class of 2031) with a passion for robotics,
-engineering, embedded systems, and programming.
-
-</p>
-
-
-<p>
-
-I enjoy designing and building systems that combine
-hardware and software to solve real-world problems.
-
-</p>
-
-
-
-<p>
-
-My experience includes competitive robotics,
-Arduino development, electronics, automation,
-and engineering design.
-
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="info-card">
-
-
-<div>
-
-<h3>
-Education
-</h3>
-
-<p>
-University of Toronto Schools
-</p>
-
-<p>
-Expected Graduation: 2031
-</p>
-
-</div>
-
-
-
-<div>
-
-<h3>
-Focus Areas
-</h3>
-
-<p>
-Robotics
-</p>
-
-<p>
-Embedded Systems
-</p>
-
-<p>
-Engineering
-</p>
-
-</div>
-
-
-
-</div>
-
-
-
-
-</div>
-
-
+<!-- ============ STATS ============ -->
+<section class="stats" id="stats" aria-label="At a glance">
+  <div class="wrap stats__grid">
+    <div class="stat" data-reveal>
+      <p class="stat__num"><span data-count="2026" data-plain="true">2026</span></p>
+      <p class="stat__label">VEX World Championship qualifier</p>
+    </div>
+    <div class="stat" data-reveal>
+      <p class="stat__num"><span data-count="10">0</span><span class="stat__suffix">Top</span></p>
+      <p class="stat__label">Ranked team in Ontario</p>
+    </div>
+    <div class="stat" data-reveal>
+      <p class="stat__num"><span data-count="4">0</span></p>
+      <p class="stat__label">Roles held: driver, builder, programmer, lead</p>
+    </div>
+    <div class="stat" data-reveal>
+      <p class="stat__num"><span data-count="1">0</span><span class="stat__suffix">#</span></p>
+      <p class="stat__label">Best project — 2025 Science Fair</p>
+    </div>
+  </div>
 </section>
 
 
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="wrap">
 
+    <header class="sec-head" data-reveal>
+      <p class="sec-num">01</p>
+      <h2>About</h2>
+      <p class="sec-sub">Hardware person who writes software. Software person who owns a soldering iron.</p>
+    </header>
 
+    <div class="about">
+      <div class="about__text" data-reveal>
+        <p class="about__pull">
+          I build systems that have to work in the real world — where a loose
+          connector or a mistimed servo is the difference between a win and a rebuild.
+        </p>
+        <p>
+          I'm a student at the University of Toronto Schools (Class of 2031) working
+          across robotics, embedded systems, electronics and programming. Most of what
+          I know came from building something, breaking it, and building it again.
+        </p>
+        <p>
+          On the competition side I drive, build and program for VEX team 19109M. On
+          my own time I design hardware projects like NeoPark — a full automation
+          prototype from RFID logic to the servo that actually lifts the gate.
+        </p>
+        <p>
+          I care about the part of engineering where the schematic meets the physical
+          object: tolerances, iteration, and testing until it stops surprising you.
+        </p>
+      </div>
 
+      <aside class="about__side" data-reveal>
+        <div class="glass-card info-card">
+          <div class="info-row">
+            <p class="info-row__k">Education</p>
+            <p class="info-row__v">University of Toronto Schools</p>
+            <p class="info-row__m">Class of 2031</p>
+          </div>
+          <div class="info-row">
+            <p class="info-row__k">Focus</p>
+            <ul class="chips">
+              <li>Robotics</li>
+              <li>Embedded systems</li>
+              <li>Automation</li>
+              <li>Engineering design</li>
+            </ul>
+          </div>
+          <div class="info-row">
+            <p class="info-row__k">Toolbox</p>
+            <ul class="chips chips--quiet">
+              <li>C++</li>
+              <li>Arduino</li>
+              <li>VEXcode</li>
+              <li>JavaScript</li>
+              <li>HTML/CSS</li>
+              <li>CAD</li>
+            </ul>
+          </div>
+          <div class="info-row">
+            <p class="info-row__k">Based in</p>
+            <p class="info-row__v">Toronto, Ontario</p>
+          </div>
+        </div>
+      </aside>
+    </div>
 
-
-
-
-<!-- SKILLS PREVIEW -->
-
-<section class="section reveal">
-
-
-<div class="section-title">
-
-<p>
-02
-</p>
-
-<h2>
-Technical Skills
-</h2>
-
-</div>
-
-
-
-
-<div class="skills-grid">
-
-
-<div class="skill-card">
-
-<h3>
-Robotics
-</h3>
-
-<p>
-VEX Robotics, robot design,
-strategy, competition systems
-</p>
-
-</div>
-
-
-
-
-<div class="skill-card">
-
-<h3>
-Embedded Systems
-</h3>
-
-<p>
-Arduino, sensors, microcontrollers,
-hardware integration
-</p>
-
-</div>
-
-
-
-
-<div class="skill-card">
-
-<h3>
-Programming
-</h3>
-
-<p>
-C++, HTML, CSS,
-JavaScript
-</p>
-
-</div>
-
-
-
-
-<div class="skill-card">
-
-<h3>
-Engineering
-</h3>
-
-<p>
-Prototyping, debugging,
-system design
-</p>
-
-</div>
-
-
-
-</div>
-
-
-
+  </div>
 </section>
 
 
-
-
-
-
-
-
-
-<!-- PROJECTS -->
-
-<section id="projects" class="section reveal">
-
-
-<div class="section-title">
-
-<p>
-03
-</p>
-
-<h2>
-Featured Projects
-</h2>
-
-
-</div>
-
-
-
-
-<div class="projects-grid">
-
-
-
-<div class="project">
-
-
-<div class="project-number">
-01
-</div>
-
-
-<h3>
-NeoPark
-</h3>
-
-
-<p class="project-type">
-Embedded Systems Project
-</p>
-
-
-<p>
-
-An Arduino-powered smart parking gate system
-designed to demonstrate automated vehicle access
-using RFID authentication, sensors, and motor control.
-
-</p>
-
-
-
-<div class="tags">
-
-<span>
-Arduino
-</span>
-
-<span>
-C++
-</span>
-
-<span>
-RFID
-</span>
-
-<span>
-Automation
-</span>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-<div class="project">
-
-
-<div class="project-number">
-02
-</div>
-
-
-<h3>
-VEX Robotics
-</h3>
-
-
-<p class="project-type">
-UTS Circuit Breakers — 19109M
-</p>
-
-
-<p>
-
-Competitive robotics project focused on robot
-design, programming, driving, strategy,
-and engineering iteration.
-
-</p>
-
-
-<div class="tags">
-
-<span>
-Robotics
-</span>
-
-<span>
-Engineering
-</span>
-
-<span>
-Programming
-</span>
-
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-
-</section>
-
-<!-- EXPERIENCE -->
-
-<section id="experience" class="section reveal">
-
-
-<div class="section-title">
-
-<p>
-04
-</p>
-
-<h2>
-Experience
-</h2>
-
-</div>
-
-
-
-
-<div class="timeline">
-
-
-
-<div class="timeline-item">
-
-
-<div class="timeline-dot"></div>
-
-
-<div class="timeline-content">
-
-
-<h3>
-VEX Robotics Team 19109M
-</h3>
-
-
-<h4>
-UTS Circuit Breakers
-</h4>
-
-
-<p class="role">
-Driver • Main Builder • Programmer • Team Lead
-</p>
-
-
-
-<p>
-
-Competed in the VEX V5RC 2025–26 Push Back season,
-contributing to robot development, programming,
-driving performance, and competition strategy.
-
-</p>
-
-
-
-<ul>
-
-<li>
-Qualified for the 2026 VEX Robotics World Championship
-</li>
-
-<li>
-Ontario Provincial Qualifier
-</li>
-
-<li>
-Top 10 Team in Ontario
-</li>
-
-<li>
-Led technical collaboration and team development
-</li>
-
-</ul>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="timeline-item">
-
-
-<div class="timeline-dot"></div>
-
-
-<div class="timeline-content">
-
-
-<h3>
-NeoPark
-</h3>
-
-
-<h4>
-Embedded Systems Developer
-</h4>
-
-
-<p class="role">
-Arduino • Electronics • Automation
-</p>
-
-
-
-<p>
-
-Designed and developed a smart parking gate
-prototype that combines RFID authentication,
-infrared vehicle detection, servo control,
-and an LCD interface.
-
-</p>
-
-
-
-<ul>
-
-<li>
-Presented at 2025 Science Fair
-</li>
-
-<li>
-Received Best Science Fair Project recognition
-</li>
-
-<li>
-School-wide recognition and certificate
-</li>
-
-</ul>
-
-
-</div>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
+<!-- ============ CAPABILITIES (BENTO) ============ -->
+<section class="section" id="skills">
+  <div class="wrap">
+
+    <header class="sec-head" data-reveal>
+      <p class="sec-num">02</p>
+      <h2>Capabilities</h2>
+      <p class="sec-sub">Four things I keep getting better at.</p>
+    </header>
+
+    <div class="bento">
+
+      <article class="bento__cell bento__cell--wide glass-card" data-reveal>
+        <span class="bento__icon" aria-hidden="true">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4M8.5 13.5v.02M15.5 13.5v.02M9 19v2M15 19v2"/></svg>
+        </span>
+        <h3>Competitive robotics</h3>
+        <p>
+          Full-cycle VEX V5 work — drivetrain and mechanism design, autonomous routines,
+          driver practice, match strategy and the scouting that decides alliances.
+        </p>
+        <ul class="chips chips--quiet">
+          <li>VEX V5RC</li><li>Autonomous</li><li>Mechanism design</li><li>Scouting</li>
+        </ul>
+      </article>
+
+      <article class="bento__cell glass-card" data-reveal>
+        <span class="bento__icon" aria-hidden="true">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>
+        </span>
+        <h3>Embedded systems</h3>
+        <p>Microcontrollers, sensor fusion, motor and servo control, and the wiring that holds it together.</p>
+        <ul class="chips chips--quiet"><li>Arduino</li><li>RFID</li><li>IR sensing</li><li>I²C / LCD</li></ul>
+      </article>
+
+      <article class="bento__cell glass-card" data-reveal>
+        <span class="bento__icon" aria-hidden="true">
+          <svg class="icon" viewBox="0 0 24 24"><path d="m8.5 8.5-4 3.5 4 3.5M15.5 8.5l4 3.5-4 3.5M13.5 5l-3 14"/></svg>
+        </span>
+        <h3>Programming</h3>
+        <p>C++ for anything with a motor attached, plus the web stack for everything else.</p>
+        <ul class="chips chips--quiet"><li>C++</li><li>JavaScript</li><li>HTML</li><li>CSS</li></ul>
+      </article>
+
+      <article class="bento__cell bento__cell--wide glass-card" data-reveal>
+        <span class="bento__icon" aria-hidden="true">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 3.2 20 7.6v8.8L12 20.8 4 16.4V7.6z"/><path d="M12 12.2 20 7.6M12 12.2v8.6M12 12.2 4 7.6"/></svg>
+        </span>
+        <h3>Engineering process</h3>
+        <p>
+          Prototyping, structured debugging, iteration logs and system design — the
+          unglamorous discipline that turns a working demo into a reliable machine.
+        </p>
+        <ul class="chips chips--quiet">
+          <li>Prototyping</li><li>Debugging</li><li>Documentation</li><li>Testing</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
 </section>
 
 
+<!-- ============ PROJECTS ============ -->
+<section class="section" id="projects">
+  <div class="wrap">
 
+    <header class="sec-head" data-reveal>
+      <p class="sec-num">03</p>
+      <h2>Selected work</h2>
+      <p class="sec-sub">Two projects that taught me the most.</p>
+    </header>
 
+    <div class="projects">
 
+      <article class="project glass-card" data-reveal>
+        <div class="project__media" aria-hidden="true">
+          <div class="project__art project__art--neopark">
+            <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+            <svg class="project__glyph" viewBox="0 0 24 24"><path d="M4 17V9.5a1 1 0 0 1 .6-.9l6.9-3a1 1 0 0 1 .8 0l6.9 3a1 1 0 0 1 .6.9V17"/><path d="M2.5 17h19M8 17v-4h8v4"/></svg>
+          </div>
+        </div>
+        <div class="project__body">
+          <div class="project__top">
+            <p class="project__index">01</p>
+            <p class="project__kicker">Embedded systems · 2025</p>
+          </div>
+          <h3>NeoPark</h3>
+          <p>
+            An Arduino-powered smart parking gate. RFID authenticates the vehicle, an
+            infrared sensor confirms it's actually there, a servo drives the barrier and
+            an LCD reports state — a complete access-control loop built from scratch.
+          </p>
+          <ul class="chips"><li>Arduino</li><li>C++</li><li>RFID</li><li>Servo control</li><li>Automation</li></ul>
+          <p class="project__note">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.7l5.9-.8z"/></svg>
+            Best Science Fair Project — school-wide recognition
+          </p>
+        </div>
+      </article>
 
+      <article class="project project--rev glass-card" data-reveal>
+        <div class="project__media" aria-hidden="true">
+          <div class="project__art project__art--vex">
+            <span class="grid-lines"></span>
+            <svg class="project__glyph" viewBox="0 0 24 24"><rect x="3.5" y="8" width="17" height="10" rx="3"/><circle cx="8" cy="18.5" r="2.2"/><circle cx="16" cy="18.5" r="2.2"/><path d="M12 3.5V8M9.5 12.2v.02M14.5 12.2v.02"/></svg>
+          </div>
+        </div>
+        <div class="project__body">
+          <div class="project__top">
+            <p class="project__index">02</p>
+            <p class="project__kicker">Competitive robotics · 2025–26</p>
+          </div>
+          <h3>VEX 19109M — UTS Circuit Breakers</h3>
+          <p>
+            A season-long build for the V5RC Push Back game: robot architecture,
+            autonomous programming, driver control and the strategy work between matches.
+            Iterated across the whole season against real competition data.
+          </p>
+          <ul class="chips"><li>VEX V5</li><li>C++</li><li>Autonomous</li><li>Mechanical design</li><li>Strategy</li></ul>
+          <p class="project__note">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 5.5H4.5v1.5a3 3 0 0 0 3 3M17 5.5h2.5V7a3 3 0 0 1-3 3"/></svg>
+            Qualified for the 2026 VEX Robotics World Championship
+          </p>
+        </div>
+      </article>
 
-
-
-<!-- VIDEO SECTION -->
-
-
-<section class="section reveal">
-
-
-<div class="section-title">
-
-<p>
-05
-</p>
-
-<h2>
-Featured Video
-</h2>
-
-</div>
-
-
-
-
-<div class="video-container">
-
-
-<iframe
-
-src="https://www.youtube.com/embed/3Y-hIcNKANw"
-
-title="VEX Robotics Reveal Video"
-
-frameborder="0"
-
-allowfullscreen>
-
-</iframe>
-
-
-</div>
-
-
-
+    </div>
+  </div>
 </section>
 
 
+<!-- ============ EXPERIENCE ============ -->
+<section class="section" id="experience">
+  <div class="wrap">
 
+    <header class="sec-head" data-reveal>
+      <p class="sec-num">04</p>
+      <h2>Experience</h2>
+      <p class="sec-sub">Where the work actually happened.</p>
+    </header>
 
+    <ol class="timeline">
 
+      <li class="tl" data-reveal>
+        <div class="tl__marker" aria-hidden="true"><span></span></div>
+        <div class="tl__card glass-card">
+          <p class="tl__period">2025 — 2026</p>
+          <h3>VEX Robotics Team 19109M</h3>
+          <p class="tl__org">UTS Circuit Breakers</p>
+          <p class="tl__role">Driver · Main builder · Programmer · Team lead</p>
+          <p>
+            Competed the full V5RC 2025–26 Push Back season, owning robot development,
+            autonomous programming, driving performance and match strategy.
+          </p>
+          <ul class="ticks">
+            <li>Qualified for the 2026 VEX Robotics World Championship</li>
+            <li>Ontario Provincial qualifier</li>
+            <li>Top 10 team in Ontario</li>
+            <li>Led technical collaboration and team development</li>
+          </ul>
+        </div>
+      </li>
 
+      <li class="tl" data-reveal>
+        <div class="tl__marker" aria-hidden="true"><span></span></div>
+        <div class="tl__card glass-card">
+          <p class="tl__period">2025</p>
+          <h3>NeoPark</h3>
+          <p class="tl__org">Independent project</p>
+          <p class="tl__role">Arduino · Electronics · Automation</p>
+          <p>
+            Designed and developed a smart parking gate prototype combining RFID
+            authentication, infrared vehicle detection, servo control and an LCD interface.
+          </p>
+          <ul class="ticks">
+            <li>Presented at the 2025 Science Fair</li>
+            <li>Received Best Science Fair Project recognition</li>
+            <li>School-wide recognition and certificate</li>
+          </ul>
+        </div>
+      </li>
 
-
-
-<!-- ACHIEVEMENTS -->
-
-
-<section class="section reveal">
-
-
-<div class="section-title">
-
-<p>
-06
-</p>
-
-<h2>
-Achievements
-</h2>
-
-</div>
-
-
-
-
-<div class="achievement-grid">
-
-
-
-<div class="achievement-card">
-
-<h3>
-VEX Worlds 2026
-</h3>
-
-<p>
-Qualified for the VEX Robotics World Championship
-with UTS Circuit Breakers 19109M.
-</p>
-
-</div>
-
-
-
-
-<div class="achievement-card">
-
-<h3>
-Provincial Qualification
-</h3>
-
-<p>
-Qualified and competed at the Ontario Provincial
-level during the 2025–26 Push Back season.
-</p>
-
-</div>
-
-
-
-
-<div class="achievement-card">
-
-<h3>
-Science Fair Recognition
-</h3>
-
-<p>
-Created NeoPark and received recognition as one
-of the top science fair projects at school.
-</p>
-
-</div>
-
-
-
-
-</div>
-
-
+    </ol>
+  </div>
 </section>
 
 
-
-
-
-
-
-
-
-<!-- BLOG -->
-
-
-<section id="writing" class="section reveal">
-
-
-<div class="section-title">
-
-<p>
-07
-</p>
-
-<h2>
-Writing
-</h2>
-
-</div>
-
-
-
-
-
-<div class="blog-grid">
-
-
-
-<div class="blog-card">
-
-
-<p>
-Engineering Journal
-</p>
-
-
-<h3>
-Building NeoPark: My First Embedded System
-</h3>
-
-
-<span>
-Arduino • RFID • Automation
-</span>
-
-
-<p>
-
-A look into designing, debugging, and building
-a complete hardware automation system from
-concept to prototype.
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="blog-card">
-
-
-<p>
-Robotics
-</p>
-
-
-<h3>
-Lessons From Competitive Robotics
-</h3>
-
-
-<span>
-VEX • Strategy • Engineering
-</span>
-
-
-<p>
-
-How iteration, teamwork, and testing shape
-successful robotics designs.
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="blog-card">
-
-
-<p>
-Engineering
-</p>
-
-
-<h3>
-Learning Through Building
-</h3>
-
-
-<span>
-Hardware • Software • Innovation
-</span>
-
-
-<p>
-
-Why hands-on projects are one of the best ways
-to understand technology.
-
-</p>
-
-
-</div>
-
-
-
-</div>
-
-
-
+<!-- ============ REEL ============ -->
+<section class="section" id="reel">
+  <div class="wrap">
+
+    <header class="sec-head" data-reveal>
+      <p class="sec-num">05</p>
+      <h2>The reel</h2>
+      <p class="sec-sub">19109M, in motion.</p>
+    </header>
+
+    <div class="video glass-card" data-reveal>
+      <button class="video__facade" type="button"
+              data-video="3Y-hIcNKANw"
+              aria-label="Play the VEX Robotics reveal video">
+        <img class="video__poster"
+             src="https://i.ytimg.com/vi/3Y-hIcNKANw/maxresdefault.jpg"
+             alt="" width="1280" height="720" loading="lazy" decoding="async"
+             onerror="this.remove()">
+        <span class="video__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+        </span>
+        <span class="video__meta">
+          <span class="video__title">VEX Robotics reveal</span>
+          <span class="video__sub">Plays on YouTube</span>
+        </span>
+      </button>
+    </div>
+
+  </div>
 </section>
 
 
-
-
-
-
-
-
-
-<
-
-
-
-
-
-
-
-
-<!-- CONTACT -->
-
-
-<section id="contact" class="section reveal">
-
-
-<div class="section-title">
-
-<p>
-08
-</p>
-
-<h2>
-Contact
-</h2>
-
-</div>
-
-
-
-
-
-<div class="contact-container">
-
-
-
-<div class="contact-info">
-
-
-<h3>
-Let's connect.
-</h3>
-
-
-<p>
-
-Interested in robotics, engineering,
-or collaboration?
-
-</p>
-
-
-
-<a href="https://www.linkedin.com/in/anshu-arunav-ab3454425/" target="_blank">
-LinkedIn
-</a>
-
-
-<a href="https://github.com/AnshuPlayz17" target="_blank">
-GitHub
-</a>
-
-
-<a href="https://www.instagram.com/aanshu_arunavv/" target="_blank">
-Instagram
-</a>
-
-
-</div>
-
-
-
-
-
-
-
-
-<form class="contact-form">
-
-
-<input 
-type="text"
-placeholder="Name"
-required>
-
-
-
-<input
-type="email"
-placeholder="Email"
-required>
-
-
-
-<textarea
-
-placeholder="Message"
-
-rows="5"
-
-required>
-
-</textarea>
-
-
-
-<button type="submit">
-
-Send Message
-
-</button>
-
-
-</form>
-
-
-
-</div>
-
-
-
+<!-- ============ RECOGNITION ============ -->
+<section class="section" id="awards">
+  <div class="wrap">
+
+    <header class="sec-head" data-reveal>
+      <p class="sec-num">06</p>
+      <h2>Recognition</h2>
+      <p class="sec-sub">Results worth keeping.</p>
+    </header>
+
+    <div class="awards">
+
+      <article class="award glass-card" data-reveal>
+        <p class="award__year">2026</p>
+        <h3>VEX Worlds qualifier</h3>
+        <p>Qualified for the VEX Robotics World Championship with UTS Circuit Breakers 19109M.</p>
+      </article>
+
+      <article class="award glass-card" data-reveal>
+        <p class="award__year">2025–26</p>
+        <h3>Ontario Provincials</h3>
+        <p>Qualified and competed at the Ontario Provincial level during the Push Back season.</p>
+      </article>
+
+      <article class="award glass-card" data-reveal>
+        <p class="award__year">2025</p>
+        <h3>Best Science Fair Project</h3>
+        <p>NeoPark recognised as one of the top science fair projects school-wide.</p>
+      </article>
+
+    </div>
+  </div>
 </section>
 
 
+<!-- ============ WRITING ============ -->
+<section class="section" id="writing">
+  <div class="wrap">
+
+    <header class="sec-head" data-reveal>
+      <p class="sec-num">07</p>
+      <h2>Writing</h2>
+      <p class="sec-sub">Notes from the workbench. Full posts coming soon.</p>
+    </header>
+
+    <div class="notes">
+
+      <article class="note glass-card" data-reveal>
+        <p class="note__cat">Engineering journal</p>
+        <h3>Building NeoPark: my first embedded system</h3>
+        <p>Designing, debugging and building a complete hardware automation system from concept to working prototype.</p>
+        <p class="note__tags">Arduino · RFID · Automation</p>
+      </article>
+
+      <article class="note glass-card" data-reveal>
+        <p class="note__cat">Robotics</p>
+        <h3>Lessons from competitive robotics</h3>
+        <p>How iteration, teamwork and relentless testing shape a design that actually survives a tournament.</p>
+        <p class="note__tags">VEX · Strategy · Engineering</p>
+      </article>
+
+      <article class="note glass-card" data-reveal>
+        <p class="note__cat">Engineering</p>
+        <h3>Learning through building</h3>
+        <p>Why hands-on projects remain the fastest route to genuinely understanding technology.</p>
+        <p class="note__tags">Hardware · Software · Innovation</p>
+      </article>
+
+    </div>
+  </div>
+</section>
 
 
+<!-- ============ CONTACT ============ -->
+<section class="section section--contact" id="contact">
+  <div class="wrap">
+
+    <header class="sec-head" data-reveal>
+      <p class="sec-num">08</p>
+      <h2>Let's build something.</h2>
+      <p class="sec-sub">Robotics, embedded projects, or a team that needs another engineer — I'd like to hear about it.</p>
+    </header>
+
+    <div class="contact">
+
+      <div class="contact__side" data-reveal>
+        <a class="link-row" href="https://www.linkedin.com/in/anshu-arunav-ab3454425/" target="_blank" rel="noopener noreferrer">
+          <span class="link-row__k">LinkedIn</span>
+          <span class="link-row__v">anshu-arunav</span>
+          <svg class="icon link-row__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+        <a class="link-row" href="https://github.com/AnshuPlayz17" target="_blank" rel="noopener noreferrer">
+          <span class="link-row__k">GitHub</span>
+          <span class="link-row__v">AnshuPlayz17</span>
+          <svg class="icon link-row__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+        <a class="link-row" href="https://www.instagram.com/aanshu_arunavv/" target="_blank" rel="noopener noreferrer">
+          <span class="link-row__k">Instagram</span>
+          <span class="link-row__v">aanshu_arunavv</span>
+          <svg class="icon link-row__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+        <p class="contact__aside">Usually replying within a day or two, between practice sessions.</p>
+      </div>
+
+      <form class="contact__form glass-card" id="contactForm" novalidate data-reveal>
+        <div class="field">
+          <label for="cf-name">Name</label>
+          <input id="cf-name" name="name" type="text" autocomplete="name" required
+                 aria-describedby="cf-name-err">
+          <p class="field__err" id="cf-name-err" hidden>Please enter your name.</p>
+        </div>
+
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" name="email" type="email" autocomplete="email" required
+                 aria-describedby="cf-email-err">
+          <p class="field__err" id="cf-email-err" hidden>Please enter a valid email address.</p>
+        </div>
+
+        <div class="field">
+          <label for="cf-msg">Message</label>
+          <textarea id="cf-msg" name="message" rows="5" required aria-describedby="cf-msg-err"></textarea>
+          <p class="field__err" id="cf-msg-err" hidden>Please add a short message.</p>
+        </div>
+
+        <button class="btn btn--primary btn--full" type="submit">
+          Send message
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h13M12 6l6 6-6 6"/></svg>
+        </button>
+
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+</main>
 
 
-
-
-
-<footer>
-
-
-<p>
-
-© 2026 Anshu Arunav
-
-</p>
-
-
-<p>
-
-Robotics • Embedded Systems • Engineering
-
-</p>
-
-
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div>
+      <p class="footer__name">Anshu Arunav</p>
+      <p class="footer__tag">Robotics · Embedded systems · Engineering</p>
+    </div>
+    <nav class="footer__links" aria-label="Footer">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <a href="#home">Back to top</a>
+    </nav>
+    <p class="footer__copy">© <span id="year">2026</span> Anshu Arunav. Built from scratch.</p>
+  </div>
 </footer>
 
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Anshu Arunav",
+  "jobTitle": "Student Robotics & Embedded Systems Engineer",
+  "description": "Student engineer building competitive robots, embedded systems and automation projects.",
+  "alumniOf": { "@type": "EducationalOrganization", "name": "University of Toronto Schools" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
+  "knowsAbout": ["Robotics", "Embedded Systems", "Arduino", "C++", "VEX Robotics", "Automation"],
+  "sameAs": [
+    "https://www.linkedin.com/in/anshu-arunav-ab3454425/",
+    "https://github.com/AnshuPlayz17",
+    "https://www.instagram.com/aanshu_arunavv/"
+  ]
+}
+</script>
 
-
-
-<script src="script.js"></script>
-
+<script src="script.js" defer></script>
 
 </body>
-
 </html>
