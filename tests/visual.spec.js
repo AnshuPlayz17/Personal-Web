@@ -32,7 +32,19 @@ const PARTS = [
   ['footer', '.footer'],
 ];
 
+// The reel section shows the YouTube poster, which loads on some networks and
+// not others — it produced a 26% pixel diff between this machine and CI, and
+// made one shot flaky. Visual regression should never depend on a third
+// party's CDN, so the poster is replaced with a fixed image everywhere.
+const POSTER_STUB = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAKAAAABaCAIAAACwpMoFAAAAoklEQVR42u3RMQ0AAAgEsdfDxIh/ZfiAJqfgmurR4WIBYAEWYAEWYAEWYMACLMACLMACLMCABViABViABViABRiwAAuwAAuwAAswYAEWYAEWYAEWYMACLMACLMACLMACDFiABViABViABRiwAAuwAAuwAAswYBcAC7AAC7AAC7AAAxZgARZgARZgAQYswAIswAIswAIswIAFWIAFWIAFWIB/tdcpFmHbvALQAAAAAElFTkSuQmCC',
+  'base64'
+);
+
 async function prepare(page, scheme) {
+  await page.route('**://i.ytimg.com/**', (route) =>
+    route.fulfill({ status: 200, contentType: 'image/png', body: POSTER_STUB })
+  );
   await page.emulateMedia({ colorScheme: scheme, reducedMotion: 'reduce' });
   await page.goto('/index.html');
   await page.evaluate(() => {
