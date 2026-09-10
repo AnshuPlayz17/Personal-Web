@@ -101,7 +101,13 @@ test.describe('keyboard', () => {
                 : r.width === 0 || r.height === 0
                   ? 'zero size'
                   : null;
-        return hidden ? `${a.tagName}.${(a.className || '').toString().slice(0, 28)} — ${hidden}` : null;
+        if (!hidden) return null;
+        // Report enough to diagnose without a second CI round: this failed once
+        // with the right class applied and the wrong computed opacity, and the
+        // message did not say whether an inline style or a rule was in charge.
+        const cls = (a.className || '').toString().slice(0, 40);
+        const inline = a.getAttribute('style') || 'none';
+        return `${a.tagName}.${cls} — ${hidden} (opacity ${cs.opacity}, inline: ${inline})`;
       });
 
     const invisible = [];
@@ -152,12 +158,16 @@ test.describe('keyboard', () => {
         opacity: parseFloat(cs.opacity),
         visibility: cs.visibility,
         marked: b.classList.contains('is-focus'),
+        inlineOpacity: b.style.opacity,
       };
     });
     expect(seen.focused).toBe(true);
     // `is-focus` is what makes this hold in engines where :focus does not match
     // a document that is not itself focused.
     expect(seen.marked).toBe(true);
+    // And the inline lock, which is what makes it hold regardless of which rule
+    // wins the cascade — the class alone was applied on WebKit and still lost.
+    expect(seen.inlineOpacity).toBe('1');
     expect(seen.visibility).toBe('visible');
     expect(seen.opacity).toBeGreaterThan(0.95);
   });

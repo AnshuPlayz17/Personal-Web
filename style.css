@@ -1997,14 +1997,13 @@ h3 {
    It is not redundant: :focus only matches while the document itself is
    focused, and headless WebKit reports this button as document.activeElement
    without matching :focus. The event fires either way. */
-.to-top:focus,
-.to-top:focus-visible,
-.to-top.is-focus {
-  opacity: 1;
-  visibility: visible;
-  transform: none;
-  transition: none;
-}
+/* Three rules rather than one selector list on purpose: a selector a browser
+   does not understand invalidates the whole group it sits in, so grouping
+   `:focus-visible` with the others would let one unsupported pseudo-class take
+   the plain `:focus` and `.is-focus` rules down with it. */
+.to-top:focus { opacity: 1; visibility: visible; transform: none; transition: none; }
+.to-top:focus-visible { opacity: 1; visibility: visible; transform: none; transition: none; }
+.to-top.is-focus { opacity: 1; visibility: visible; transform: none; transition: none; }
 .to-top .icon { width: 19px; height: 19px; }
 
 
