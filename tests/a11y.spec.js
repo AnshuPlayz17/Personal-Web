@@ -179,6 +179,28 @@ test.describe('keyboard', () => {
     ).toBeLessThan(0.05);
   });
 
+  // The WebKit failure, made deterministic and engine-independent. A transition
+  // only advances when a frame renders, and until it does its value outranks
+  // every declaration — inline and !important included. Headless WebKit kept
+  // getting stuck at the start of this button's fade-in. Forcing a fade far
+  // longer than the test reproduces exactly that state in any engine.
+  test('focus wins against a fade that has not finished', async ({ page }) => {
+    await page.goto('/index.html');
+    await page.addStyleTag({ content: '.to-top { transition: opacity 30s linear !important; }' });
+
+    // Scrolling down starts the fade-in, which now cannot possibly complete.
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await expect(page.locator('#toTop')).toHaveClass(/is-shown/);
+    const midFade = await page.evaluate(() =>
+      parseFloat(getComputedStyle(document.getElementById('toTop')).opacity));
+    expect(midFade, 'the fade should still be near its start').toBeLessThan(0.5);
+
+    await page.locator('#toTop').focus();
+    const focused = await page.evaluate(() =>
+      parseFloat(getComputedStyle(document.getElementById('toTop')).opacity));
+    expect(focused, 'a focused control must be visible even mid-fade').toBeGreaterThan(0.95);
+  });
+
   test('the controls that matter are all reachable by keyboard', async ({ page }) => {
     await settle(page);
     await page.goto('/index.html');

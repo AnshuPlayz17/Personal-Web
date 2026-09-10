@@ -2084,7 +2084,11 @@ h3 {
     transform: none !important;
   }
   .glass-card::after { display: none; }
-  .to-top { transition: opacity 0.001ms !important; }
+  /* Not a 0.001ms transition: a transition still has to be advanced by a
+     rendering frame, and its value outranks every declaration until it is.
+     Headless WebKit does not always give it that frame, so the button sat at
+     the start of its own fade-in. Reduced motion should mean no transition. */
+  .to-top { transition: none !important; }
 }
 
 

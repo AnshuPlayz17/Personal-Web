@@ -574,11 +574,19 @@
     var FOCUS_LOCK = { opacity: '1', visibility: 'visible', transform: 'none', transition: 'none' };
     btn.addEventListener('focus', function () {
       btn.classList.add('is-focus');
-      for (var k in FOCUS_LOCK) btn.style[k] = FOCUS_LOCK[k];
+      // `important` is doing real work here. A running transition outranks a
+      // plain inline declaration, so `opacity: 1` alone loses to the fade the
+      // button is in the middle of. Setting `transition: none` this way cancels
+      // the transition already in flight and stops another from starting, after
+      // which the opacity applies at once. Measured, rather than assumed:
+      //   mid-transition, plain inline opacity:1  -> computed 0.00556667
+      //   after transition:none !important        -> computed 1
+      for (var k in FOCUS_LOCK) btn.style.setProperty(k, FOCUS_LOCK[k], 'important');
     });
     btn.addEventListener('blur', function () {
       btn.classList.remove('is-focus');
-      for (var k in FOCUS_LOCK) btn.style[k] = '';
+      // removeProperty, not `= ''`: assignment does not clear an !important value.
+      for (var k in FOCUS_LOCK) btn.style.removeProperty(k);
       check();   // it may have been held open only because it had focus
     });
 
