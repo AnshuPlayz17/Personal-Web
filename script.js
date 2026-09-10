@@ -541,8 +541,17 @@
 
     var ticking = false;
     function check() {
-      btn.classList.toggle('is-shown', window.scrollY > window.innerHeight * 1.2);
       ticking = false;
+      var show = window.scrollY > window.innerHeight * 1.2;
+      // Never take this button away while it holds focus. Hiding it starts an
+      // opacity transition, and a running transition's value outranks every
+      // declaration in the cascade — inline styles and !important included — so
+      // the button computes to opacity 0 while all three of its rules say 1.
+      // Measured: mid-transition, `opacity: 1 !important` inline still computes
+      // to 0.006. Declaring harder cannot win this; not starting the transition
+      // can. Leaving a focused control where the user put it is also just right.
+      if (!show && document.activeElement === btn) return;
+      btn.classList.toggle('is-shown', show);
     }
 
     window.addEventListener('scroll', function () {
@@ -570,6 +579,7 @@
     btn.addEventListener('blur', function () {
       btn.classList.remove('is-focus');
       for (var k in FOCUS_LOCK) btn.style[k] = '';
+      check();   // it may have been held open only because it had focus
     });
 
     btn.addEventListener('click', function () {
