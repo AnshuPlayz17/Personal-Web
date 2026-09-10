@@ -1,4 +1,7 @@
 const { test, expect } = require('@playwright/test');
+const fs = require('fs');
+const path = require('path');
+const zlib = require('zlib');
 
 /**
  * Behaviour of the site's interactive parts. Runs on Chromium, Firefox and
@@ -261,6 +264,54 @@ test.describe('résumé', () => {
     const res = await request.get(`/${href}`);
     expect(res.status()).toBe(200);
     expect(res.headers()['content-type']).toContain('pdf');
+  });
+
+  // The published PDF once printed edge to edge, with no margin on any side,
+  // because the stylesheet's `@page { margin: 0 }` silently overrode the margin
+  // passed to Chromium's pdf(). It looked fine in a browser and wrong on paper,
+  // and nothing here would have caught it. This reads the shipped file.
+  test('the PDF has real margins and is a single page', async () => {
+    const buf = fs.readFileSync(path.join(__dirname, '..', 'assets', 'anshu-arunav-resume.pdf'));
+    const raw = buf.toString('latin1');
+
+    expect((raw.match(/\/Type\s*\/Page[^s]/g) || []).length, 'should be one page').toBe(1);
+
+    const media = raw.match(/\/MediaBox\s*\[\s*0\s+0\s+([\d.]+)\s+([\d.]+)/);
+    expect(media, '/MediaBox not found').not.toBeNull();
+    const [pageW, pageH] = [parseFloat(media[1]), parseFloat(media[2])];
+
+    // The page content is drawn inside a clip rectangle set at the top of the
+    // content stream, in the scale that stream's first `cm` establishes.
+    let header = null;
+    let i = 0;
+    while (i < buf.length) {
+      const s0 = buf.indexOf('stream', i);
+      if (s0 === -1) break;
+      let p0 = s0 + 6;
+      if (buf[p0] === 0x0d) p0++;
+      if (buf[p0] === 0x0a) p0++;
+      const e0 = buf.indexOf('endstream', p0);
+      if (e0 === -1) break;
+      try {
+        const inflated = zlib.inflateSync(buf.subarray(p0, e0));
+        if (inflated.includes('BT')) { header = inflated.subarray(0, 200).toString('latin1'); break; }
+      } catch (_) { /* not a flate stream */ }
+      i = e0 + 9;
+    }
+    expect(header, 'no text-bearing content stream found').not.toBeNull();
+
+    const scale = parseFloat(header.match(/^([\d.\-]+)\s/)[1]);
+    const clip = header.match(/([\d.\-]+)\s+([\d.\-]+)\s+([\d.\-]+)\s+([\d.\-]+)\s+re/);
+    expect(clip, 'no clip rectangle in the content stream').not.toBeNull();
+
+    const [x, y, w, h] = clip.slice(1, 5).map((v) => parseFloat(v) * scale);
+    const margins = { left: x, right: pageW - x - w, top: y, bottom: pageH - y - h };
+
+    // 28pt is a bit under 0.4in — comfortably clears the 0.5/0.6in the résumé
+    // uses, and nowhere near the 0 that shipped.
+    for (const [side, value] of Object.entries(margins)) {
+      expect(value, `${side} margin is ${value.toFixed(1)}pt`).toBeGreaterThan(28);
+    }
   });
 
   test('it is also reachable from the contact list and the footer', async ({ page }) => {
