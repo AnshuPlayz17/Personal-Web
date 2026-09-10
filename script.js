@@ -556,8 +556,21 @@
     // the button in the same frame focus arrives on it. The CSS :focus rule
     // covers that in a focused window; this covers it everywhere, because the
     // event fires even where :focus does not match.
-    btn.addEventListener('focus', function () { btn.classList.add('is-focus'); });
-    btn.addEventListener('blur', function () { btn.classList.remove('is-focus'); });
+    // The class alone was not enough: WebKit CI reported this button as
+    // `to-top is-shown is-focus` and still computed opacity ~0, so the class was
+    // applied and its rule was not winning. Rather than guess which rule lost,
+    // set the properties inline — an inline declaration does not depend on the
+    // cascade at all. The class stays because the CSS rule is what covers the
+    // no-JS case, and because it makes the state visible in a DOM dump.
+    var FOCUS_LOCK = { opacity: '1', visibility: 'visible', transform: 'none', transition: 'none' };
+    btn.addEventListener('focus', function () {
+      btn.classList.add('is-focus');
+      for (var k in FOCUS_LOCK) btn.style[k] = FOCUS_LOCK[k];
+    });
+    btn.addEventListener('blur', function () {
+      btn.classList.remove('is-focus');
+      for (var k in FOCUS_LOCK) btn.style[k] = '';
+    });
 
     btn.addEventListener('click', function () {
       window.scrollTo({
