@@ -101,7 +101,13 @@ test.describe('keyboard', () => {
                 : r.width === 0 || r.height === 0
                   ? 'zero size'
                   : null;
-        return hidden ? `${a.tagName}.${(a.className || '').toString().slice(0, 28)} — ${hidden}` : null;
+        if (!hidden) return null;
+        // Report enough to diagnose without a second CI round: this failed once
+        // with the right class applied and the wrong computed opacity, and the
+        // message did not say whether an inline style or a rule was in charge.
+        const cls = (a.className || '').toString().slice(0, 40);
+        const inline = a.getAttribute('style') || 'none';
+        return `${a.tagName}.${cls} — ${hidden} (opacity ${cs.opacity}, inline: ${inline})`;
       });
 
     const invisible = [];
@@ -124,11 +130,12 @@ test.describe('keyboard', () => {
     expect([...new Set(invisible)]).toEqual([]);
   });
 
-  // The failure this guards against is narrow and was seen only on WebKit CI:
-  // a Tab can scroll the page, the scroll handler can decide to hide the
-  // back-to-top button in that same moment, and `visibility` is transitioned
-  // with a delay — so the button stays focusable for the length of its own
-  // fade-out. Focus then sits on something the user cannot see.
+  // A Tab can scroll the page, and the scroll handler used to hide this button
+  // in that same moment. Hiding it starts an opacity transition, and a running
+  // transition's value outranks every declaration in the cascade — inline and
+  // !important included — so the button computed to 0 while all its rules said
+  // 1. WebKit CI caught it repeatedly. The button is now simply not hidden while
+  // it holds focus, so no transition starts and there is nothing to lose to.
   test('the back-to-top button stays visible for as long as it holds focus', async ({ page }) => {
     await settle(page);
     await page.goto('/index.html');
@@ -137,29 +144,39 @@ test.describe('keyboard', () => {
     await expect(page.locator('#toTop')).toHaveClass(/is-shown/);
 
     await page.locator('#toTop').focus();
-    // Scrolling back to the top makes the scroll handler drop `is-shown`,
-    // which is exactly the moment the button used to fade out under focus.
+    // Scrolling back to the top is what used to drop `is-shown` under focus.
     await page.evaluate(() => window.scrollTo(0, 0));
-    await expect(page.locator('#toTop')).not.toHaveClass(/is-shown/);
-    // Well past the 280ms fade, so this cannot pass by catching it mid-transition.
+    // Well past the 280ms fade, so this cannot pass by catching it mid-flight.
     await page.waitForTimeout(400);
 
-    const seen = await page.evaluate(() => {
+    const held = await page.evaluate(() => {
       const b = document.getElementById('toTop');
       const cs = getComputedStyle(b);
       return {
         focused: document.activeElement === b,
         opacity: parseFloat(cs.opacity),
         visibility: cs.visibility,
+        shown: b.classList.contains('is-shown'),
         marked: b.classList.contains('is-focus'),
+        inlineOpacity: b.style.opacity,
       };
     });
-    expect(seen.focused).toBe(true);
-    // `is-focus` is what makes this hold in engines where :focus does not match
-    // a document that is not itself focused.
-    expect(seen.marked).toBe(true);
-    expect(seen.visibility).toBe('visible');
-    expect(seen.opacity).toBeGreaterThan(0.95);
+    expect(held.focused).toBe(true);
+    // The button is deliberately still `is-shown`: that is the fix. Dropping it
+    // is what started the transition that no declaration could outrank.
+    expect(held.shown).toBe(true);
+    expect(held.marked).toBe(true);
+    expect(held.inlineOpacity).toBe('1');
+    expect(held.visibility).toBe('visible');
+    expect(held.opacity).toBeGreaterThan(0.95);
+
+    // And it must not stay pinned open forever — losing focus at the top of the
+    // page hides it again, which is the behaviour holding it open borrowed from.
+    await page.evaluate(() => document.getElementById('toTop').blur());
+    await expect(page.locator('#toTop')).not.toHaveClass(/is-shown/);
+    await expect.poll(() =>
+      page.evaluate(() => parseFloat(getComputedStyle(document.getElementById('toTop')).opacity))
+    ).toBeLessThan(0.05);
   });
 
   test('the controls that matter are all reachable by keyboard', async ({ page }) => {

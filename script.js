@@ -541,8 +541,17 @@
 
     var ticking = false;
     function check() {
-      btn.classList.toggle('is-shown', window.scrollY > window.innerHeight * 1.2);
       ticking = false;
+      var show = window.scrollY > window.innerHeight * 1.2;
+      // Never take this button away while it holds focus. Hiding it starts an
+      // opacity transition, and a running transition's value outranks every
+      // declaration in the cascade — inline styles and !important included — so
+      // the button computes to opacity 0 while all three of its rules say 1.
+      // Measured: mid-transition, `opacity: 1 !important` inline still computes
+      // to 0.006. Declaring harder cannot win this; not starting the transition
+      // can. Leaving a focused control where the user put it is also just right.
+      if (!show && document.activeElement === btn) return;
+      btn.classList.toggle('is-shown', show);
     }
 
     window.addEventListener('scroll', function () {
@@ -556,8 +565,22 @@
     // the button in the same frame focus arrives on it. The CSS :focus rule
     // covers that in a focused window; this covers it everywhere, because the
     // event fires even where :focus does not match.
-    btn.addEventListener('focus', function () { btn.classList.add('is-focus'); });
-    btn.addEventListener('blur', function () { btn.classList.remove('is-focus'); });
+    // The class alone was not enough: WebKit CI reported this button as
+    // `to-top is-shown is-focus` and still computed opacity ~0, so the class was
+    // applied and its rule was not winning. Rather than guess which rule lost,
+    // set the properties inline — an inline declaration does not depend on the
+    // cascade at all. The class stays because the CSS rule is what covers the
+    // no-JS case, and because it makes the state visible in a DOM dump.
+    var FOCUS_LOCK = { opacity: '1', visibility: 'visible', transform: 'none', transition: 'none' };
+    btn.addEventListener('focus', function () {
+      btn.classList.add('is-focus');
+      for (var k in FOCUS_LOCK) btn.style[k] = FOCUS_LOCK[k];
+    });
+    btn.addEventListener('blur', function () {
+      btn.classList.remove('is-focus');
+      for (var k in FOCUS_LOCK) btn.style[k] = '';
+      check();   // it may have been held open only because it had focus
+    });
 
     btn.addEventListener('click', function () {
       window.scrollTo({
