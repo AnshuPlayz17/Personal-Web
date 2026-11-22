@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.2",
-    "@playwright/test": "1.56.1",
+    "@playwright/test": "1.63.0",
     "axe-core": "4.10.3",
     "http-server": "14.1.1"
   }

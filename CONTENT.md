@@ -15,10 +15,9 @@ returns to the LinkedIn hand-off — nothing else needs to change.
 
 ## 2. Depth in the project write-ups
 
-The site carries all five projects from your résumé — VEX 19109M, Calenda,
-SkySaver, Tappy and NeoPark — each with a **How it works** breakdown. Those are
-accurate but general. What would make them genuinely good is the part only you
-can write:
+The site carries all five projects — VEX 19109M, Calenda, SkySaver, Tappy and
+NeoPark — each with a **How it works** breakdown. Those are accurate but
+general. What would make them genuinely good is the part only you can write:
 
 - What was the hardest problem, and what did the first attempt get wrong?
 - What did you measure or test to know it was fixed?
@@ -28,14 +27,23 @@ Two or three sentences per project. Add them inside the `.detail__note`
 paragraph in `index.html`. Specific beats polished — "the servo browned out the
 Arduino until I moved it to its own supply" is worth more than any adjective.
 
-SkySaver and Tappy need this most: they're the newest and the least documented,
-and right now the site can only describe what they do, not what was hard about
-them.
+The VEX card needs it most now that you're the one writing the code: an
+autonomous routine that kept failing and what it turned out to be is worth more
+than any description of the season. SkySaver and Tappy are next.
+
+Also still unwritten: the Override rebuild. The site says you're leading it and
+submitting the cascade lift for the Innovate Award, which is accurate but says
+nothing about why that lift is worth an award. A sentence or two on what it does
+that a normal lift doesn't would carry the whole card.
 
 ## 3. Résumé — done
 
-`assets/anshu-arunav-resume.pdf` is live, regenerated from your fourth draft,
+`assets/anshu-arunav-resume.pdf` is live, regenerated from your November draft,
 and linked from three places: the hero button, the contact list and the footer.
+
+Its source now lives in the repo at `tools/resume/resume.html`, with a build
+script beside it — see the README. It used to exist only in a scratch directory,
+which meant every rebuild started from nothing.
 
 It was typeset from your Word document rather than converted from it, because
 the converter available here couldn't open any file at all. The wording is
