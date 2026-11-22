@@ -32,17 +32,41 @@ module.exports = defineConfig({
    * 379 pixels, so it sat 34x under the threshold and the suite reported the
    * page unchanged.
    *
-   * These renders have proven deterministic, matching byte for byte between
-   * this machine and CI, because the fonts are self-hosted and there is no
-   * system font substitution to vary. That makes a tight absolute budget
-   * affordable: enough for stray anti-aliasing, not enough to hide a word.
+   * Self-hosted fonts remove system font substitution, but they do not make
+   * glyph rasterisation identical across machines: the authoring container and
+   * CI once ran the same browser build and matched byte for byte, and the day
+   * they stopped, every one of the 38 snapshots failed by the same ~1,151
+   * pixels — text anti-aliasing, not layout. The launch flags on the chromium
+   * project below pin rasterisation so baselines stay portable, which is what
+   * makes a tight absolute budget affordable: enough for stray anti-aliasing,
+   * not enough to hide a word.
    */
   expect: {
     toHaveScreenshot: { maxDiffPixels: 60, animations: 'disabled', scale: 'css' },
   },
 
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        /**
+         * Deterministic text rasterisation. Without these, glyph anti-aliasing
+         * differs between browser builds and between machines, so a baseline
+         * generated in one place fails everywhere else by a fraction of a
+         * percent — enough to blow an absolute pixel budget that exists to
+         * catch real regressions.
+         */
+        launchOptions: {
+          args: [
+            '--font-render-hinting=none',
+            '--disable-font-subpixel-positioning',
+            '--disable-lcd-text',
+            '--disable-skia-runtime-opts',
+          ],
+        },
+      },
+    },
     { name: 'firefox',  use: { ...devices['Desktop Firefox'] } },
     { name: 'webkit',   use: { ...devices['Desktop Safari'] } },
   ],
