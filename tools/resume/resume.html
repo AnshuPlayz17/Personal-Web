@@ -1,0 +1,105 @@
+<meta charset="utf-8">
+<style>
+@page { size: Letter; margin: 0.5in 0.6in; }
+@font-face{font-family:Inter;font-weight:100 900;src:url("http://127.0.0.1:8899/assets/fonts/inter-latin.woff2") format("woff2");}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,-apple-system,Segoe UI,sans-serif;color:#1c1814;font-size:8.8pt;line-height:1.28;
+     letter-spacing:-.005em;-webkit-font-smoothing:antialiased}
+header{margin-bottom:10pt}
+h1{font-size:19pt;font-weight:600;letter-spacing:-.035em;line-height:1.05;margin-bottom:5pt}
+.meta{font-size:8.9pt;color:#554d44}
+.meta a{color:#9c580f;text-decoration:none}
+h2{font-size:8.2pt;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#9c580f;
+   margin:8pt 0 3.5pt;padding-bottom:2.5pt;border-bottom:.75pt solid #d8d0c4}
+section:first-of-type h2{margin-top:0}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12pt;margin-top:4pt}
+.row:first-child{margin-top:0}
+.who{font-weight:600;font-size:10pt;letter-spacing:-.015em}
+.when{font-size:8.6pt;color:#6e655b;white-space:nowrap}
+.role{font-size:8.2pt;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#554d44;margin-top:1.5pt}
+ul{margin:2.5pt 0 0 0;list-style:none}
+li{position:relative;padding-left:11pt;margin-bottom:1.3pt;color:#3a332c}
+li::before{content:"";position:absolute;left:2pt;top:5.2pt;width:3pt;height:3pt;border-radius:50%;background:#9c580f}
+.note{margin-top:3pt;color:#554d44}
+.skill{display:flex;gap:9pt;margin-bottom:2.5pt}
+.skill dt{flex:0 0 74pt;font-size:8pt;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#6e655b;padding-top:.6pt}
+.skill dd{flex:1;color:#3a332c}
+</style>
+
+<header>
+  <h1>Anshu Arunav</h1>
+  <p class="meta">Toronto, Ontario &nbsp;|&nbsp; <a href="mailto:anshuarunav@gmail.com">anshuarunav@gmail.com</a></p>
+  <p class="meta"><a href="https://anshuplayz17.github.io/Personal-Web">anshuplayz17.github.io/Personal-Web</a> &nbsp;|&nbsp; <a href="https://github.com/AnshuPlayz17">github.com/AnshuPlayz17</a></p>
+</header>
+
+<section>
+  <h2>Education</h2>
+  <div class="row"><span class="who">University of Toronto Schools (UTS)</span><span class="when">Toronto, ON</span></div>
+  <p class="role">Grade 8</p>
+  <div class="row"><span class="who">Spirit of Math</span><span class="when">Grades 5 to 8, current</span></div>
+</section>
+
+<section>
+  <h2>Robotics</h2>
+  <div class="row"><span class="who">VEX Robotics Team 19109M (Mango), UTS Circuit Breakers</span><span class="when">2025 to present</span></div>
+  <p class="role">Captain, Lead Coder, and Driver</p>
+  <ul>
+    <li>Lead a six-person team as its only programmer: write and debug all robot code and autos in C++ with PROS and LemLib, version-controlled on GitHub.</li>
+    <li>Drive the robot in competition, including elimination matches, and diagnose mechanical and control failures on the field under time pressure.</li>
+    <li>Qualified for the 2026 VEX Robotics World Championship through provincials, on a top 10 team in Ontario.</li>
+    <li>Leading the robot rebuild for the Override season; the team is submitting its side-mounted cascade lift for the Innovate Award.</li>
+    <li>Fabricate custom parts on a Bambu Lab A1, maintain the engineering notebook, and produced the robot reveal video.</li>
+    <li>Mentor the UTS junior team and train teammates on build technique and robot systems.</li>
+  </ul>
+  <div class="row"><span class="who">FRC Team 11753 SHFT</span><span class="when">2026, rookie season</span></div>
+  <p class="role">Strategy Lead</p>
+  <ul>
+    <li>Won Overtime Sunday with the team in its rookie season; lead competition strategy.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Projects and Ventures</h2>
+  <div class="row"><span class="who">Calenda &nbsp;|&nbsp; SaugaHacks</span><span class="when">Team project, in development</span></div>
+  <ul>
+    <li>Web app for students and families that keeps schoolwork, schedule, and commitments in one place.</li>
+    <li>Core build complete and functional; currently refining and adding features.</li>
+  </ul>
+  <div class="row"><span class="who">SkySaver &nbsp;|&nbsp; Ignition Hacks</span><span class="when">Team of 3, complete</span></div>
+  <ul>
+    <li>Natural-language drone search engine for search and rescue: a user describes what to look for and the system locates it from a live camera feed.</li>
+    <li>Built the drone hardware and contributed to the TypeScript codebase combining computer vision, natural-language queries, and GPS.</li>
+  </ul>
+  <div class="row"><span class="who">Tappy &nbsp;|&nbsp; ETHOnline 2026</span><span class="when">Team, complete</span></div>
+  <ul>
+    <li>Agentic Ethereum wallet: an AI agent transacts for a user, approved by tapping a cold NFC tag or Flipper Zero to the phone.</li>
+    <li>Built the hardware side (ESP32-C3 SuperMini wired to a Flipper Zero over UART) and contributed to the TypeScript implementation that keeps signing keys off the agent.</li>
+  </ul>
+  <p class="note">Additional hackathons: Terminal X26, NASA Space Apps Toronto, uOttaHack 9.</p>
+</section>
+
+<section>
+  <h2>Awards and Achievements</h2>
+  <ul>
+    <li>2026 VEX Robotics World Championship qualifier; top 10 team in Ontario, V5RC Push Back season.</li>
+    <li>Best Science Fair Project, school-wide, 2025, for NeoPark, a solo-built Arduino parking gate with RFID entry.</li>
+    <li>Six-time science fair winner and six-time public speaking competition winner.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Skills</h2>
+  <dl>
+    <div class="skill"><dt>Languages</dt><dd>C++ (PROS, LemLib, VEXcode), TypeScript, HTML, CSS, JavaScript; Git and GitHub</dd></div>
+    <div class="skill"><dt>Hardware</dt><dd>VEX V5, Arduino, ESP32-C3, Flipper Zero, RFID, NFC, servos, sensors, 3D printing (Bambu Lab A1)</dd></div>
+    <div class="skill"><dt>Engineering</dt><dd>Mechanical design and fabrication, prototyping, debugging, competition strategy, UI/UX, CAD (learning)</dd></div>
+  </dl>
+</section>
+
+<section>
+  <h2>Activities and Languages</h2>
+  <dl>
+    <div class="skill"><dt>Activities</dt><dd>UTS junior basketball (starting centre) and badminton; Karate brown belt, black belt grading Dec 2026; Swimming Level 10; junior robotics mentor</dd></div>
+    <div class="skill"><dt>Spoken</dt><dd>English, French, Odia, Mandarin, Hindi; learning Latin and Korean</dd></div>
+  </dl>
+</section>

@@ -19,7 +19,26 @@ assets/fonts/       self-hosted Inter + JetBrains Mono (variable, woff2)
 assets/images/      optional project photos — see the README in that folder
 assets/og-image.png 1200x630 social share card
 assets/anshu-arunav-resume.pdf  linked from the hero, contact list and footer
+tools/resume/       the résumé's source + build script (see below)
 ```
+
+## The résumé
+
+`assets/anshu-arunav-resume.pdf` is generated, not hand-made. Edit
+`tools/resume/resume.html` and run:
+
+```
+node tools/resume/build.mjs
+```
+
+It typesets the résumé in the site's own fonts and writes the PDF. The build
+refuses to finish if the result runs to two pages or if the phone number has
+crept back in, and `tests/functional.spec.js` separately checks the shipped file
+is one page with real margins.
+
+Margins live in the stylesheet's `@page` rule and nowhere else. Chromium lets a
+CSS `@page` margin override the margin passed to `pdf()`, so setting both is how
+this once shipped printing edge to edge: the CSS said `0` and quietly won.
 
 ## Lighthouse
 

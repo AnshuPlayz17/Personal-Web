@@ -1089,6 +1089,15 @@ h3 {
 }
 .project:hover .project__glyph { transform: scale(1.07); }
 
+/* The hackathons that did not become one of the cards above. */
+.projects__more {
+  margin-top: var(--s-5);
+  text-align: center;
+  color: var(--text-2);
+  font-size: var(--fs-small);
+}
+.projects__more strong { color: var(--text); font-weight: 600; }
+
 .project__body {
   padding: clamp(26px, 3.2vw, 44px);
   display: flex;
